@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+
+  <link rel="stylesheet" href="../styles.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="topbar">
+    <a href="index.html" class="brand">
+      <img src="../Images/girlwithbun.png" class="brand-logo" alt="logo">
+      <span class="brand-name">nikita kelwada</span>
+    </a>
+
+    <nav class="tabs">
+      <a class="tab" href="index.html">Landing</a>
+      <a class="tab" href="portfolio.html">Portfolio</a>
+      <a class="tab" href="qualifications.html">Qualifications</a>
+      <a class="tab" href="service.html">Service</a>
+      <a class="tab" href="ai.html">AI</a>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main class="layout portfolio-wrap">
+    <section class="intro">
+      <h1 class="name">Portfolio</h1>
+      <p class="bio">
+        A selection of projects I’ve built through coursework, hackathons, and personal exploration.
+      </p>
+    </section>
+
+    <section class="portfolio-list">
+
+      <!-- Echo -->
+      <article class="project-feature">
+        <div class="project-media">
+          <img src="../Images/echo.jpg" class="project-img" alt="Echo project">
+        </div>
+
+        <div class="project-content">
+          <div class="project-topline">
+            <span class="project-year">2024</span>
+          </div>
+
+          <h2 class="project-name">Echo</h2>
+          <p class="project-desc">
+            A computer vision–based game designed to help children with alexithymia recognize emotions.
+            Implemented real-time facial analysis and machine learning models with a Flask backend and
+            a React/Next.js frontend.
+          </p>
+
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">React</span>
+            <span class="tag">Computer Vision</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- ProjectUX -->
+      <article class="project-feature reverse">
+        <div class="project-media">
+          <img src="../Images/ProjectUX.png" class="project-img" alt="ProjectUX">
+        </div>
+
+        <div class="project-content">
+          <div class="project-topline">
+            <span class="project-year">2024–2025</span>
+          </div>
+
+          <h2 class="project-name">ProjectUX</h2>
+          <p class="project-desc">
+            Founded and co-managed a 75-person full-stack engineering project. Led architecture
+            decisions, established CI checks and GitHub workflows, and delivered weekly React labs
+            with structured mentorship.
+          </p>
+
+          <div class="tag-row">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Leadership</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Web Scraping -->
+      <article class="project-feature">
+        <div class="project-media">
+          <img src="../Images/webscraping.png" class="project-img" alt="Web scraping pipeline">
+        </div>
+
+        <div class="project-content">
+          <div class="project-topline">
+            <span class="project-year">2025</span>
+          </div>
+
+          <h2 class="project-name">Distributed Web Scraping Pipeline</h2>
+          <p class="project-desc">
+            Built a distributed data pipeline to scrape and process structured web data at scale,
+            featuring retry logic, validation, and MongoDB storage.
+          </p>
+
+          <div class="tag-row">
+            <span class="tag">Python</span>
+            <span class="tag">MongoDB</span>
+            <span class="tag">Async Systems</span>
+            <span class="tag">Data Pipelines</span>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+</body>
+</html>

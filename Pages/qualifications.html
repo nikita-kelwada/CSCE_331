@@ -1,0 +1,133 @@
+<!--
+  qualifications.html
+
+  GOAL:
+  - Show resume + skills side-by-side
+  - Embed PDF like a real document viewer (rounded card)
+  - Match clean, professional layout similar to example screenshot
+  - Satisfy rubric: non-trivial content + embedded resume
+
+  FILE STRUCTURE ASSUMED:
+  /styles.css
+  /Images/Nikita_Kelwada_Resume.pdf
+  /Images/bunnylogo.png
+  /Pages/qualifications.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nikita Kelwada | Qualifications</title>
+
+  <!-- Main stylesheet (one level up from Pages/) -->
+  <link rel="stylesheet" href="../styles.css" />
+
+  <!-- Same font as rest of site -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap"
+    rel="stylesheet"
+  >
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <!-- ================= HEADER (match index.html exactly) ================= -->
+<header class="topbar">
+  <!-- Brand links back to landing page -->
+  <a href="index.html" class="brand" aria-label="Go to landing page">
+    <img
+      src="../Images/girlwithbun.png"
+      class="brand-logo"
+      alt="Personal logo"
+    >
+    <span class="brand-name">nikita kelwada</span>
+  </a>
+
+  <!-- Navigation (same labels/order as screenshot) -->
+  <nav class="tabs" aria-label="Primary navigation">
+    <a class="tab" href="index.html">Landing</a>
+    <a class="tab" href="portfolio.html">Portfolio</a>
+    <a class="tab" href="qualifications.html">Qualifications</a>
+    <a class="tab" href="service.html">Service</a>
+    <a class="tab" href="ai.html">AI</a>
+  </nav>
+</header>
+
+
+  <!-- ================= MAIN ================= -->
+  <main class="qualifications-page">
+
+    <!-- ===== Two-column layout ===== -->
+    <section class="qualifications-layout">
+
+      <!-- ===== LEFT COLUMN: TEXT ===== -->
+      <section class="qualifications-text">
+
+        <h1 class="qual-title">Resume + Skills</h1>
+
+        <p class="qual-paragraph">
+          I’m building a strong foundation in Computer Engineering through
+          coursework, technical projects, and leadership experience.
+          This page highlights my technical skill set and includes my full resume
+          for detailed review.
+        </p>
+
+        <p class="qual-paragraph">
+          I am currently a student at Texas A&amp;M University and am interested
+          in software development, systems design, and building clean,
+          user-focused technical solutions.
+        </p>
+
+        <!-- ===== Skills Section ===== -->
+        <div class="skills-block">
+          <h2 class="skills-title">Technical Skills</h2>
+
+          <ul class="skills-list">
+            <li><strong>Languages:</strong> Python, Java, C++, JavaScript</li>
+            <li><strong>Web:</strong> HTML, CSS, basic JavaScript</li>
+            <li><strong>Tools:</strong> Git, GitHub, VS Code</li>
+            <li><strong>Concepts:</strong> Data structures, debugging, version control</li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- ===== RIGHT COLUMN: PDF VIEWER ===== -->
+      <section class="qualifications-resume">
+
+        <!-- Viewer card -->
+        <div class="resume-viewer">
+
+          <!-- Viewer header (like Google Docs / browser PDF UI) -->
+          <div class="resume-viewer-header">
+            <span class="resume-viewer-title">Resume</span>
+            <a
+              class="resume-viewer-action"
+              href="../Images/Nikita_Kelwada_Resume.pdf"
+              target="_blank"
+              rel="noopener"
+            >
+              Open
+            </a>
+          </div>
+
+          <!-- Embedded PDF -->
+          <iframe
+            class="resume-iframe"
+            src="../Images/Nikita_Kelwada_Resume.pdf"
+            title="Embedded Resume PDF"
+          ></iframe>
+
+        </div>
+      </section>
+
+    </section>
+  </main>
+
+</body>
+</html>
