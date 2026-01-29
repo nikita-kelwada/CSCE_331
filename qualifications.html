@@ -1,19 +1,3 @@
-<!--
-  qualifications.html
-
-  GOAL:
-  - Show resume + skills side-by-side
-  - Embed PDF like a real document viewer (rounded card)
-  - Match clean, professional layout similar to example screenshot
-  - Satisfy rubric: non-trivial content + embedded resume
-
-  FILE STRUCTURE ASSUMED:
-  /styles.css
-  /Nikita_Kelwada_Resume.pdf
-  /bunnylogo.png
-  /Pages/qualifications.html
--->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,10 +15,8 @@
 
 <body>
 
-  <!-- ================= HEADER ================= -->
-  <!-- ================= HEADER (match index.html exactly) ================= -->
+  <!-- Header -->
 <header class="topbar">
-  <!-- Brand links back to landing page -->
   <a href="index.html" class="brand" aria-label="Go to landing page">
     <img
       src="Images/girlonlaptop.png"
@@ -44,7 +26,7 @@
     <span class="brand-name">nikita kelwada</span>
   </a>
 
-  <!-- Navigation (same labels/order as screenshot) -->
+  <!-- Navigation -->
   <nav class="tabs" aria-label="Primary navigation">
     <a class="tab" href="index.html">Landing</a>
     <a class="tab" href="portfolio.html">Portfolio</a>
@@ -55,13 +37,13 @@
 </header>
 
 
-  <!-- ================= MAIN ================= -->
+  <!--main content -->
   <main class="qualifications-page">
 
-    <!-- ===== Two-column layout ===== -->
+    <!-- makes 2 columns-->
     <section class="qualifications-layout">
 
-      <!-- ===== LEFT COLUMN: TEXT ===== -->
+      <!--- text on the left -->
       <section class="qualifications-text">
 
         <h1 class="qual-title">Resume + Skills</h1>
@@ -79,7 +61,7 @@
           user-focused technical solutions.
         </p>
 
-        <!-- ===== Skills Section ===== -->
+        <!-- Skills explanation -->
         <div class="skills-block">
           <h2 class="skills-title">Technical Skills</h2>
 
@@ -93,13 +75,13 @@
 
       </section>
 
-      <!-- ===== RIGHT COLUMN: PDF VIEWER ===== -->
+      <!-- right column pdf ===== -->
       <section class="qualifications-resume">
 
         <!-- Viewer card -->
         <div class="resume-viewer">
 
-          <!-- Viewer header (like Google Docs / browser PDF UI) -->
+          <!-- Viewer header  -->
           <div class="resume-viewer-header">
             <span class="resume-viewer-title">Resume</span>
             <a
@@ -112,7 +94,7 @@
             </a>
           </div>
 
-          <!-- Embedded PDF -->
+          <!-- Embedded PDF (NOTE : MAKE SURE IT WORKS ON INCONITO)-->
           <iframe
             class="resume-iframe"
             src="Images/Nikita_Kelwada_Resume.pdf"

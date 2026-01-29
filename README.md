@@ -1,3 +1,5 @@
 # CSCE_331
 
-Testing - First Push
+Nikita Kelwada:
+
+Personal Portfolio CSCE 331 - Updated for Deliverable 1 
