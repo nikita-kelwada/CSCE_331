@@ -3,21 +3,407 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Generated Page | Nikita Kelwada</title>
+  <title>AI | Nikita Kelwada</title>
 
+  <!-- Fonts used across the rest of the site -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Delicious+Handrawn&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#faf0e6;
+      --ink:#2b2b2b;
+      --muted:#6b6b6b;
+      --line:rgba(0,0,0,.15);
+      --card:#ffffff;
+      --shadow:0 18px 45px rgba(0,0,0,.12);
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:"Patrick Hand", cursive;
+      color:var(--ink);
+      background:var(--bg);
+    }
+
+    /* ===== Header / Nav (same structure as other pages) ===== */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:20px 28px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      text-decoration:none;
+      color:var(--ink);
+    }
+    .brand-logo{ width:30px; height:auto; }
+    .brand-name{ font-size:20px; font-weight:400; }
+
+    .tabs{ display:flex; gap:10px; flex-wrap:wrap; }
+    .tab{
+      text-decoration:none;
+      color:var(--ink);
+      padding:20px 12px;
+      font-size:20px;
+      display:inline-block;
+      transition:transform .2s ease;
+    }
+    .tab:hover{ transform:scale(1.10); }
+
+    /* ===== Page wrapper ===== */
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:18px 28px 70px;
+    }
+
+    /* ===== Hero ===== */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:28px;
+      align-items:center;
+      padding:26px;
+      border:2px solid rgba(0,0,0,.45);
+      border-radius:18px;
+      background:rgba(255,255,255,.55);
+      box-shadow:var(--shadow);
+    }
+
+    .hero h1{
+      font-family:"Delicious Handrawn", cursive;
+      font-size:54px;
+      font-weight:400;
+      line-height:1.0;
+      margin:0 0 10px;
+    }
+    .hero p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:18px;
+      max-width:60ch;
+    }
+
+    .cta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:10px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 16px;
+      border-radius:999px;
+      border:2px solid rgba(0,0,0,.6);
+      background:#fff;
+      color:var(--ink);
+      text-decoration:none;
+      font-size:16px;
+      transition:transform .18s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform:scale(1.04); }
+    .btn.primary{
+      background:var(--ink);
+      color:#fff;
+      border-color:var(--ink);
+    }
+
+    .hero-media{
+      border-radius:16px;
+      overflow:hidden;
+      border:2px solid rgba(0,0,0,.12);
+      background:#fff;
+      box-shadow:0 14px 40px rgba(0,0,0,.10);
+      min-height:220px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px;
+    }
+    .hero-media img{
+      width:100%;
+      height:auto;
+      max-height:320px;
+      object-fit:contain;
+      border-radius:12px;
+    }
+
+    /* ===== Quick facts strip ===== */
+    .facts{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:12px;
+    }
+    .chip{
+      background:#fff;
+      border:2px solid rgba(0,0,0,.45);
+      border-radius:16px;
+      padding:14px 14px;
+      box-shadow:0 10px 26px rgba(0,0,0,.08);
+    }
+    .chip .label{
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+    .chip .value{
+      font-size:18px;
+      line-height:1.2;
+    }
+
+    /* ===== Section styling ===== */
+    .section{
+      margin-top:44px;
+    }
+    .section h2{
+      font-family:"Delicious Handrawn", cursive;
+      font-size:40px;
+      font-weight:400;
+      margin:0 0 12px;
+    }
+    .section .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:17px;
+      max-width:70ch;
+    }
+
+    /* ===== Services ===== */
+    .cards{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap:14px;
+    }
+    .card{
+      background:#fff;
+      border:2px solid rgba(0,0,0,.45);
+      border-radius:18px;
+      padding:16px 16px 14px;
+      box-shadow:0 12px 32px rgba(0,0,0,.09);
+      transition:transform .18s ease;
+    }
+    .card:hover{ transform:translateY(-3px); }
+
+    .card h3{
+      margin:0 0 8px;
+      font-size:22px;
+      font-weight:400;
+      font-family:"Delicious Handrawn", cursive;
+    }
+    .card p{
+      margin:0 0 10px;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:16px;
+    }
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:6px;
+    }
+    .pill{
+      border:2px solid rgba(0,0,0,.6);
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:13px;
+      background:#fff;
+    }
+
+    /* ===== Gallery ===== */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:14px;
+    }
+    figure{
+      margin:0;
+      background:#fff;
+      border:2px solid rgba(0,0,0,.45);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 12px 34px rgba(0,0,0,.10);
+    }
+    figure img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      display:block;
+    }
+    figcaption{
+      padding:12px 14px 14px;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:15px;
+    }
+    .cap-title{
+      display:block;
+      color:var(--ink);
+      font-size:16px;
+      margin-bottom:4px;
+    }
+
+    /* ===== Repertoire (details) ===== */
+    details{
+      background:#fff;
+      border:2px solid rgba(0,0,0,.45);
+      border-radius:16px;
+      padding:12px 14px;
+      box-shadow:0 10px 26px rgba(0,0,0,.08);
+    }
+    details + details{ margin-top:10px; }
+    summary{
+      cursor:pointer;
+      font-family:"Delicious Handrawn", cursive;
+      font-size:22px;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    .summary-hint{
+      font-family:"Patrick Hand", cursive;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .songlist{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.8;
+    }
+
+    /* ===== Highlights ===== */
+    .two-col{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:start;
+    }
+    .panel{
+      background:#fff;
+      border:2px solid rgba(0,0,0,.45);
+      border-radius:18px;
+      padding:16px 16px 14px;
+      box-shadow:0 12px 32px rgba(0,0,0,.09);
+    }
+    .panel h3{
+      margin:0 0 10px;
+      font-size:26px;
+      font-family:"Delicious Handrawn", cursive;
+      font-weight:400;
+    }
+    .panel ul{
+      margin:0;
+      padding-left:18px;
+      line-height:1.8;
+      color:var(--muted);
+    }
+
+    /* ===== Contact ===== */
+    .contact-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .contact-actions{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .small{
+      font-size:15px;
+      color:var(--muted);
+      line-height:1.7;
+      margin:0;
+    }
+
+    /* ===== Prompt sections ===== */
+    .prompt-evo{
+      border-left:4px solid rgba(0,0,0,.35);
+      padding-left:14px;
+      margin-top:10px;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:16px;
+    }
+    .prompt-box{
+      margin-top:12px;
+      background:#fff;
+      border:2px solid rgba(0,0,0,.45);
+      border-radius:18px;
+      padding:14px;
+      box-shadow:0 12px 32px rgba(0,0,0,.09);
+    }
+    label{
+      display:block;
+      margin-bottom:8px;
+      font-size:16px;
+      color:var(--ink);
+    }
+    textarea{
+      width:100%;
+      height:240px;
+      padding:12px;
+      border-radius:14px;
+      border:2px solid rgba(0,0,0,.25);
+      font-family: "Patrick Hand", cursive;
+      font-size:14px;
+      line-height:1.6;
+      color:var(--ink);
+      background:#fbfbfb;
+      overflow:auto;
+      resize:vertical;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 980px){
+      .hero{ grid-template-columns:1fr; }
+      .facts{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .cards{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .gallery{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .two-col{ grid-template-columns: 1fr; }
+      .contact-grid{ grid-template-columns: 1fr; }
+      .hero h1{ font-size:46px; }
+    }
+
+    @media (max-width: 560px){
+      main{ padding:14px 16px 60px; }
+      .facts{ grid-template-columns: 1fr; }
+      .cards{ grid-template-columns: 1fr; }
+      .gallery{ grid-template-columns: 1fr; }
+      .hero{ padding:18px; }
+      .hero h1{ font-size:40px; }
+      .tab{ padding:14px 10px; font-size:18px; }
+    }
+  </style>
+</head>
 
 <body>
+  <!-- HEADER -->
   <header class="topbar">
-    <a href="index.html" class="brand">
-      <img src="girlwithbun.png" class="brand-logo" alt="logo">
+    <a href="index.html" class="brand" aria-label="Go to landing page">
+      <img src="girlonlaptop.png" class="brand-logo" alt="Personal logo">
       <span class="brand-name">nikita kelwada</span>
     </a>
 
-    <nav class="tabs">
+    <nav class="tabs" aria-label="Primary navigation">
       <a class="tab" href="index.html">Landing</a>
       <a class="tab" href="portfolio.html">Portfolio</a>
       <a class="tab" href="qualifications.html">Qualifications</a>
@@ -25,3 +411,284 @@
       <a class="tab" href="genai.html">AI</a>
     </nav>
   </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" aria-label="Harp and piano booking hero">
+      <div>
+        <h1>Harp &amp; Piano for Events</h1>
+        <p>
+          I play harp and piano for weddings, receptions, and private events — bringing a warm,
+          elegant sound that fits the room (and your vibe). If you have a specific song in mind,
+          I love learning requests.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="mailto:nikita.kelwada.01@gmail.com?subject=Performance%20Inquiry">Email to Book</a>
+          <a class="btn" href="#gallery">View Gallery</a>
+          <a class="btn" href="#repertoire">See Repertoire</a>
+        </div>
+      </div>
+
+      <div class="hero-media" aria-label="Featured image">
+        <!-- Replace with a real performance photo when you have one -->
+        <img src="meandharp.png" alt="Harp-themed image">
+      </div>
+    </section>
+
+    <!-- QUICK FACTS -->
+    <section class="facts" aria-label="Quick booking info">
+      <div class="chip">
+        <div class="label">Based near</div>
+        <div class="value">College Station / DFW</div>
+      </div>
+      <div class="chip">
+        <div class="label">Best for</div>
+        <div class="value">Weddings • Receptions • Private Events</div>
+      </div>
+      <div class="chip">
+        <div class="label">Genres</div>
+        <div class="value">Classical • Pop • Film • Ambient</div>
+      </div>
+      <div class="chip">
+        <div class="label">Travel</div>
+        <div class="value">Available with notice</div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" aria-label="Services">
+      <h2>Services</h2>
+      <p class="sub">
+        Pick a format, tell me the mood, and I’ll shape the music around it. These are common setups —
+        I’m happy to customize.
+      </p>
+
+      <div class="cards">
+        <article class="card">
+          <h3>Wedding Ceremony</h3>
+          <p>Processional + ceremony moments + recessional. Calm, romantic, and timed to the flow.</p>
+          <div class="pill-row">
+            <span class="pill">30–60 min</span>
+            <span class="pill">Requests welcome</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Cocktail Hour</h3>
+          <p>Light background music that still feels special — perfect for mingling and photos.</p>
+          <div class="pill-row">
+            <span class="pill">45–90 min</span>
+            <span class="pill">Soft + upbeat mix</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Private Events</h3>
+          <p>Birthdays, anniversaries, dinner parties, and celebrations — tailored setlist options.</p>
+          <div class="pill-row">
+            <span class="pill">30–120 min</span>
+            <span class="pill">Harp or piano</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Background Music</h3>
+          <p>Hotels, galleries, and welcome receptions — elegant ambience that matches the space.</p>
+          <div class="pill-row">
+            <span class="pill">Flexible</span>
+            <span class="pill">Low-volume friendly</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="section" aria-label="Gallery">
+      <h2>Gallery</h2>
+      <p class="sub">
+        A few snapshots and placeholders for now — swap these with your performance photos anytime.
+        (Keep the filenames the same or update the <code>src</code> values.)
+      </p>
+
+      <div class="gallery">
+        <figure>
+          <img src="solopic.jpg" alt="Headshot">
+          <figcaption><span class="cap-title">About me</span>For intros, programs, and event pages.</figcaption>
+        </figure>
+
+        <figure>
+          <img src="harpblack.png" alt="Harp image">
+          <figcaption><span class="cap-title">Harp moments</span>Elegant tone for ceremonies + cocktail hours.</figcaption>
+        </figure>
+
+        <figure>
+          <img src="harponstage.png" alt="Stage/performance placeholder">
+          <figcaption><span class="cap-title">On stage</span>Replace with a venue or performance shot.</figcaption>
+        </figure>
+
+        <figure>
+          <img src="harpediemharps.png" alt="Event placeholder">
+          <figcaption><span class="cap-title">Event vibe</span>Great for receptions + intimate gatherings.</figcaption>
+        </figure>
+
+        <figure>
+          <img src="manyharps.jpg" alt="Crowd placeholder">
+          <figcaption><span class="cap-title">Live energy</span>Swap with an audience or venue photo.</figcaption>
+        </figure>
+
+        <figure>
+          <img src="piano.png" alt="Placeholder image">
+          <figcaption><span class="cap-title">Piano Performances</span>Piano services or Piano + Harp Duets also apply!</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- REPERTOIRE -->
+    <section id="repertoire" class="section" aria-label="Repertoire">
+      <h2>Repertoire</h2>
+      <p class="sub">
+        A starter list — I can adjust for your event (classic, modern, cinematic, soft background, etc.).
+      </p>
+
+      <details open>
+        <summary>
+          Classical
+          <span class="summary-hint">click to open/close</span>
+        </summary>
+        <ul class="songlist">
+          <li>Clair de Lune (Debussy)</li>
+          <li>Gymnopédie No. 1 (Satie)</li>
+          <li>Canon in D (Pachelbel)</li>
+          <li>Ave Maria (Schubert / Bach-Gounod)</li>
+          <li>Moonlight Sonata (Beethoven) — selections</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>
+          Contemporary / Pop
+          <span class="summary-hint">click to open/close</span>
+        </summary>
+        <ul class="songlist">
+          <li>Perfect (Ed Sheeran) — instrumental</li>
+          <li>All of Me (John Legend) — instrumental</li>
+          <li>Love Story (Taylor Swift) — instrumental</li>
+          <li>Can’t Help Falling in Love — instrumental</li>
+          <li>Custom requests (with notice)</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>
+          Seasonal / Requests
+          <span class="summary-hint">click to open/close</span>
+        </summary>
+        <ul class="songlist">
+          <li>Holiday sets (winter / spring / fall)</li>
+          <li>Film / anime / game themes (instrumental)</li>
+          <li>Processional timing + cueing</li>
+          <li>“This one song matters to us” requests</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- QUALIFICATIONS / HIGHLIGHTS -->
+    <section class="section" aria-label="Qualifications and highlights">
+      <h2>Highlights</h2>
+      <p class="sub">
+        A few quick points event planners typically ask about — feel free to edit these to be 100% accurate
+        to your experience.
+      </p>
+
+      <div class="two-col">
+        <div class="panel">
+          <h3>What you get</h3>
+          <ul>
+            <li>Harp and/or piano performance for your event style</li>
+            <li>Clear communication + simple planning</li>
+            <li>Setlist guidance if you’re not sure what fits</li>
+            <li>Respectful volume + “blend in” background playing</li>
+          </ul>
+        </div>
+
+        <div class="panel">
+          <h3>Planning notes</h3>
+          <ul>
+            <li>Outdoor events: shaded area + stable surface recommended</li>
+            <li>Requests: best with 1–3 weeks notice (depending on complexity)</li>
+            <li>Arrival: early setup time helps everything feel smooth</li>
+            <li>Travel: available with advance notice</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" aria-label="Contact">
+      <h2>Contact</h2>
+      <p class="sub">
+        The easiest way to reach me is email. If you include a few details, I can reply with availability and next steps.
+      </p>
+
+      <div class="contact-grid">
+        <div class="panel">
+          <h3>Booking steps</h3>
+          <p class="small"><strong>1)</strong> Email your date, location, and event type.</p>
+          <p class="small"><strong>2)</strong> Tell me your vibe (romantic, bright, calm, modern).</p>
+          <p class="small"><strong>3)</strong> Share any must-have songs (or ask me for suggestions).</p>
+          <p class="small" style="margin-top:10px;">
+            Email: <a href="mailto:nikita.kelwada.01@gmail.com?subject=Performance%20Inquiry" style="color:var(--ink); text-decoration:underline;">nikita.kelwada.01@gmail.com</a>
+          </p>
+        </div>
+
+        <div class="panel contact-actions">
+          <a class="btn primary" href="mailto:nikita.kelwada.01@gmail.com?subject=Performance%20Inquiry">Email to Book</a>
+          <a class="btn" href="#gallery">Jump to Gallery</a>
+          <a class="btn" href="#prompting">See Prompt Section</a>
+          <p class="small">Note: Replace the placeholder gallery images with your performance photos whenever you want.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMPT REQUIREMENTS -->
+    <section id="prompting" class="section" aria-label="Prompt evolution and final prompt">
+      <h2>Prompt Evolution</h2>
+      <p class="sub">
+        This page was created through iterative prompting: starting simple, then adding structure, constraints,
+        and styling requirements. 
+      </p>
+
+      <div class="prompt-box">
+        <label for="finalPrompt"><strong>Final Prompt Used</strong> (HTML textbox)</label>
+        <textarea id="finalPrompt" name="finalPrompt" readonly>Generate a complete genai.html page for my personal website. The page should be a musician booking/portfolio page for Nikita Kelwada offering harp and piano performance services. Add sections: hero, services, gallery, repertoire, highlights, contact. No JavaScript.
+
+Constraints:
+- Use ONLY HTML + inline CSS in a single file (put CSS inside a &lt;style&gt; tag).
+- No JavaScript.
+- No external CSS files.
+- No pre-made libraries or templates (no Bootstrap, no Tailwind).
+- Keep the same header/nav structure as my other pages: a top bar with brand on the left (logo image + the text ‘nikita kelwada’) and nav links on the right in this order: Landing (index.html), Portfolio (portfolio.html), Qualifications (qualifications.html), Service (service.html), AI (genai.html).
+- Match my current site’s look: warm cream background (similar to #faf0e6), dark ink text (#2b2b2b), muted text (#6b6b6b), rounded cards, thin borders, subtle shadows, friendly hand-drawn vibe.
+
+Content/sections to include:
+1) Hero section with heading like ‘Harp &amp; Piano for Events’ + a short tagline + 2 call-to-action buttons (mailto link and “View Gallery” anchor link).
+2) Quick info strip (chips/cards) for location, availability, genres, and travel radius (use placeholders if needed).
+3) Services section with 4 cards: Wedding Ceremony, Cocktail Hour, Private Events, Background Music (each with short description + typical set length).
+4) Gallery section: responsive image grid with 6–9 image placeholders (use &lt;figure&gt; with captions).
+5) Repertoire section using &lt;details&gt;&lt;summary&gt; accordions (Classical, Contemporary, Seasonal/Requests) with sample song lists.
+6) Qualifications/highlights section with bullet points (use realistic placeholders).
+7) Contact section with email link, simple booking steps, and a small note about requests.
+8) Add a ‘Prompt Evolution’ section listing the refined prompts used.
+9) Add a labeled multiline HTML textbox using &lt;textarea&gt; titled ‘Final Prompt Used’ and pre-fill it with this exact prompt. The textarea must have a fixed height and a scrollbar if needed.
+10) Match my current site’s look: warm cream background (similar to #faf0e6), dark ink text (#2b2b2b), muted text (#6b6b6b), rounded cards, thin borders, subtle shadows, friendly hand-drawn vibe.
+11) Single file with inline CSS only; no external CSS; no libraries/templates.
+12) Add a textarea containing the final prompt with a scrollbar if it’s long.
+
+Make the page look polished and cohesive and ensure spacing/typography are consistent and responsive. I will provide names of photos you can use that are already uploaded into my folder, as well as written details of my harp/piano experience. </textarea>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

@@ -1,11 +1,14 @@
 /* =========================
-   Theme
+   THEME + GLOBALS
    ========================= */
 :root{
   --bg:#faf0e6;
   --ink:#2b2b2b;
   --muted:#6b6b6b;
   --line:rgba(0,0,0,.15);
+  --card: rgba(255,255,255,.55);
+  --shadow: 0 18px 45px rgba(0,0,0,.12);
+  --shadow-soft: 0 10px 26px rgba(0,0,0,.08);
 }
 
 *{ box-sizing:border-box; }
@@ -19,7 +22,30 @@ body{
 }
 
 /* =========================
-   Header / Nav
+   TYPOGRAPHY
+   ========================= */
+h1,h2,h3,
+.name,
+.project-name,
+.service-title,
+.qual-title{
+  font-family:"Delicious Handrawn", cursive;
+}
+
+p,li,a,span,
+.bio,
+.project-desc,
+.service-desc,
+.project-year,
+.service-label,
+.tag,
+.skills-list,
+.qual-paragraph{
+  font-family:"Patrick Hand", cursive;
+}
+
+/* =========================
+   HEADER / NAV
    ========================= */
 .topbar{
   display:flex;
@@ -35,29 +61,27 @@ body{
   text-decoration:none;
   color:var(--ink);
 }
-.brand:hover{ color:var(--ink); }
 
 .brand-logo{ width:30px; }
-.brand-name{ font-size:20px; font-weight:400; }
+.brand-name{ font-size:20px; }
 
-.tabs{ display:flex; gap:10px; flex-wrap:wrap; }
+.tabs{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
 
-/* Nav tabs: no hover background, just slight grow */
 .tab{
   text-decoration:none;
   color:var(--ink);
-  padding:20px 12px;
+  padding:18px 12px;
   font-size:20px;
-
-  display:inline-block;
-  transition:transform 0.2s ease;
+  transition:transform .2s ease;
 }
-.tab:hover{
-  transform:scale(1.10);
-}
+.tab:hover{ transform:scale(1.1); }
 
 /* =========================
-   Landing layout
+   BASE LAYOUT
    ========================= */
 .layout{
   min-height:calc(100vh - 80px);
@@ -65,44 +89,78 @@ body{
   align-items:center;
   justify-content:center;
   gap:90px;
+  padding:10px 28px 40px;
   transform:translateY(-40px);
+}
+
+.layout.portfolio-wrap,
+.layout.service-wrap{
+  min-height:auto;
+  display:block;
+  padding:26px 28px 70px;
+  transform:none;
+  max-width:1100px;
+  margin:0 auto;
 }
 
 .intro{ max-width:520px; }
 
 .name{
   font-size:42px;
-  font-weight:700;
   margin:0 0 14px;
 }
 
 .bio{
-  margin:0 0 14px;
   color:var(--muted);
   line-height:1.7;
+  font-size:18px;
 }
 
-/* Responsive landing image (works in fullscreen + split screen) */
+/* =========================
+   LANDING IMAGE
+   ========================= */
 .round-square-img{
-  width:min(280px, 30vw);
+  width:280px;
+  max-width:70vw;
   height:auto;
+  display:block;
   object-fit:contain;
 }
 
 /* =========================
-   Shared page wrapper
+   LANDING ICON LINKS (FIXED)
    ========================= */
-.layout.portfolio-wrap,
-.layout.service-wrap{
-  display:block !important;
-  max-width:1100px;
-  margin:0 auto;
-  padding:20px 28px 60px;
-  transform:none;
+.icon-links{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-top:18px;
+}
+
+.icon-links a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:34px;
+  height:34px;
+}
+
+.icon-links img{
+  width:22px;
+  height:22px;
+  object-fit:contain;
+  display:block;
+  opacity:.85;
+  transition:transform .2s ease, opacity .2s ease;
+}
+
+.icon-links a:hover img{
+  transform:scale(1.15);
+  opacity:1;
 }
 
 /* =========================
-   Portfolio
+   PORTFOLIO
    ========================= */
 .portfolio-list{
   display:flex;
@@ -113,24 +171,32 @@ body{
 
 .project-feature{
   display:grid;
-  grid-template-columns:minmax(0,560px) 1fr;
+  grid-template-columns:560px 1fr;
   gap:40px;
   align-items:center;
 }
+
 .project-feature.reverse{
-  grid-template-columns:1fr minmax(0,560px);
+  grid-template-columns:1fr 560px;
 }
-.project-feature.reverse .project-media{ order:2; }
-.project-feature.reverse .project-content{ order:1; }
 
-.project-media{ max-width:560px; }
-.project-content{ max-width:520px; }
-
-.project-topline{
+.project-media{
+  width:560px;
+  height:320px;
   display:flex;
-  justify-content:space-between;
-  margin-bottom:10px;
+  align-items:center;
+  justify-content:center;
 }
+
+.project-img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:14px;
+  box-shadow:var(--shadow);
+}
+
+.project-content{ max-width:520px; }
 
 .project-year{
   font-size:14px;
@@ -139,9 +205,7 @@ body{
 
 .project-name{
   font-size:40px;
-  font-weight:400;
   margin:0 0 10px;
-  line-height:1.05;
 }
 
 .project-desc{
@@ -150,7 +214,14 @@ body{
   max-width:52ch;
 }
 
-.tag-row{ display:flex; flex-wrap:wrap; gap:12px; }
+/* tags */
+.tag-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:14px;
+}
+
 .tag{
   padding:10px 16px;
   border-radius:999px;
@@ -159,150 +230,82 @@ body{
   font-size:14px;
 }
 
-.project-img{
-  width:100%;
-  max-height:320px;
-  object-fit:contain;
-  border-radius:14px;
-  box-shadow:0 18px 45px rgba(0,0,0,.12);
+/* project links */
+.project-links{
+  display:flex;
+  gap:14px;
+  margin-top:12px;
 }
-.project-img.tilt{ transform:rotate(-2deg); }
+
+.project-links img{
+  width:22px;
+  height:22px;
+  display:block;
+  object-fit:contain;
+  opacity:.85;
+  transition:.2s ease;
+}
+
+.project-links img:hover{
+  opacity:1;
+  transform:translateY(-2px);
+}
 
 /* =========================
-   Service
+   SERVICE
    ========================= */
 .service-list{
   display:flex;
   flex-direction:column;
-  gap:70px;
+  gap:28px;
   margin-top:22px;
 }
 
 .service-feature{
   display:grid;
-  grid-template-columns:minmax(0,560px) 1fr;
-  gap:40px;
+  grid-template-columns:minmax(0,520px) 1fr;
+  gap:24px;
   align-items:center;
+  padding:22px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:var(--card);
+  box-shadow:var(--shadow-soft);
 }
+
 .service-feature.reverse{
-  grid-template-columns:1fr minmax(0,560px);
-}
-.service-feature.reverse .service-media{ order:2; }
-.service-feature.reverse .service-content{ order:1; }
-
-.service-media{ max-width:560px; }
-.service-content{ max-width:560px; }
-
-.service-label{
-  font-size:14px;
-  color:var(--muted);
+  grid-template-columns:1fr minmax(0,520px);
 }
 
-.service-title{
-  font-size:40px;
-  font-weight:400;
-  margin:0 0 12px;
-}
-
-.service-desc{
-  font-size:16px;
-  line-height:1.8;
-  max-width:60ch;
-}
-
-.service-bullets{
-  padding-left:18px;
-  line-height:1.8;
+.service-media{
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.45);
 }
 
 .service-img{
   width:100%;
-  max-height:340px;
+  height:260px;
   object-fit:cover;
-  border-radius:14px;
-  box-shadow:0 18px 45px rgba(0,0,0,.12);
-}
-.service-img.tilt{ transform:rotate(-2deg); }
-
-/* =========================
-   Typewriter (FIXED)
-   ========================= */
-.typewriter h1{
-  display:inline-block;
-  white-space:nowrap;
-  overflow:hidden;
-  border-right:.15em solid var(--ink);
-  letter-spacing:.15em;
-
-  width:0;
-  animation:
-    typing 2.8s steps(24,end) forwards,
-    blink-caret .75s step-end infinite;
+  display:block;
 }
 
-@keyframes typing{
-  from{ width:0; }
-  to{ width:24ch; }
+.service-content{ max-width:560px; }
+
+.service-title{
+  font-size:38px;
+  margin:0 0 10px;
 }
 
-@keyframes blink-caret{
-  from,to{ border-color:transparent; }
-  50%{ border-color:var(--ink); }
+.service-desc{
+  font-size:16.5px;
+  line-height:1.75;
+  max-width:60ch;
 }
 
 /* =========================
-   Responsive (<= 900px)
-   ========================= */
-@media (max-width:900px){
-  .typewriter h1{
-    width:auto;
-    white-space:normal;
-    overflow:visible;
-    border-right:none;
-    animation:none;
-  }
-
-  .layout{
-    flex-direction:column;
-    gap:32px;
-    text-align:center;
-    transform:none;
-    padding:24px 16px;
-  }
-
-  /* Smaller screens: still responsive, just capped lower */
-  .round-square-img{
-    width:min(320px, 70vw);
-    height:auto;
-    object-fit:contain;
-  }
-
-  .project-feature,
-  .project-feature.reverse,
-  .service-feature,
-  .service-feature.reverse{
-    grid-template-columns:1fr;
-    gap:18px;
-  }
-
-  .project-name,
-  .service-title{
-    font-size:32px;
-  }
-
-  .project-img,
-  .service-img{
-    max-height:240px;
-  }
-
-  /* qualifications responsive */
-  .qualifications-layout{ grid-template-columns:1fr; }
-  .qualifications-text{ max-width:100%; }
-  .resume-iframe{ height:600px; }
-}
-
-/* =========================
-   Qualifications
+   QUALIFICATIONS
    ========================= */
 .qualifications-page{
   max-width:1200px;
@@ -314,53 +317,47 @@ body{
   display:grid;
   grid-template-columns:1fr 1.1fr;
   gap:48px;
-  align-items:start;
 }
 
 .qualifications-text{ max-width:520px; }
 
-.qualifications-page .qual-title{
+.qual-title{
   font-size:40px;
-  font-weight:700;
-  margin:0 0 18px;
+  margin-bottom:18px;
 }
 
-.qualifications-page .qual-paragraph{
+.qual-paragraph{
   color:var(--muted);
   line-height:1.7;
-  margin:0 0 16px;
-}
-
-.qualifications-page .skills-title{
-  font-size:20px;
-  font-weight:700;
-  margin:0 0 10px;
+  font-size:18px;
 }
 
 .skills-block{ margin-top:26px; }
+
+.skills-title{
+  font-size:20px;
+  margin-bottom:10px;
+}
 
 .skills-list{
   padding-left:18px;
   color:var(--muted);
   line-height:1.8;
 }
-.skills-list li{ margin-bottom:6px; }
 
-.resume-link{ margin-top:20px; font-size:14px; }
-.resume-link a{ color:var(--ink); text-decoration:underline; }
-
+/* resume card */
 .qualifications-resume{
   display:flex;
   justify-content:center;
 }
 
 .resume-viewer{
-  width:100%;
   max-width:520px;
-  background:#e0e0e0;
+  background:rgba(255,255,255,.55);
+  border:1px solid var(--line);
   border-radius:18px;
   padding:14px;
-  box-shadow:0 14px 40px rgba(0,0,0,.12);
+  box-shadow:var(--shadow-soft);
 }
 
 .resume-viewer-header{
@@ -374,82 +371,72 @@ body{
   margin-bottom:10px;
 }
 
-.resume-viewer-title{ font-size:14px; font-weight:600; }
-
 .resume-viewer-action{
-  font-size:13px;
   color:#fff;
+  font-size:14px;
   text-decoration:none;
-  opacity:.9;
 }
-.resume-viewer-action:hover{ opacity:1; text-decoration:underline; }
 
 .resume-iframe{
   width:100%;
-  height:680px;
+  height:480px;
   border:none;
   border-radius:12px;
   background:#fff;
 }
 
 /* =========================
-   Landing icon links
+   RESPONSIVE
    ========================= */
-.icon-links{
-  display:flex;
-  justify-content:center;
-  gap:16px;
-  margin-top:18px;
+@media (max-width:900px){
+  .layout{
+    flex-direction:column;
+    gap:32px;
+    transform:none;
+    padding:24px 16px;
+    text-align:center;
+  }
+
+  .project-feature,
+  .project-feature.reverse{
+    grid-template-columns:1fr;
+  }
+
+  .project-media{
+    width:100%;
+    height:240px;
+  }
+
+  .service-img{
+    height:220px;
+  }
+
+  .qualifications-layout{
+    grid-template-columns:1fr;
+  }
+
+  .resume-iframe{
+    height:520px;
+  }
 }
 
-.icon-links a{
+.service-title-row{
   display:flex;
   align-items:center;
-  justify-content:center;
-  text-decoration:none;
-  border:none;
-  background:none;
-  padding:0;
+  gap:10px;
+  margin:0 0 10px;
 }
 
-.icon-links img{
-  width:28px;
-  height:28px;
+.service-link-icon img{
+  width:20px;
+  height:20px;
   object-fit:contain;
-  transition:transform 0.2s ease;
-
-  image-rendering:-webkit-optimize-contrast; /* Safari/Chrome mac */
-  image-rendering:crisp-edges;               /* other browsers */
+  display:block;
+  opacity:.85;
+  transition:transform .2s ease, opacity .2s ease;
 }
 
-.icon-links a:hover img{
-  transform:scale(1.15);
-}
-
-/* =========================
-   Fonts: Delicious for headings, Patrick for body
-   ========================= */
-
-/* Headings / display text */
-.name,
-.project-name,
-.service-title,
-.qual-title,
-.portfolio-wrap h1,
-.portfolio-wrap h2,
-.service-wrap h1,
-.service-wrap h2{
-  font-family:"Delicious Handrawn", cursive;
-}
-
-/* Lock body-ish text to Patrick so it never inherits Delicious */
-.bio,
-.project-desc,
-.service-desc,
-.project-year,
-.service-label,
-.tag,
-.skills-list,
-.qual-paragraph{
-  font-family:"Patrick Hand", cursive;
+.service-link-icon:hover img{
+  opacity:1;
+  transform:translateY(-2px);
 }
