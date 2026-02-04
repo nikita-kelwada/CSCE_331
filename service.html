@@ -23,7 +23,7 @@
       const link = document.createElement("link");
       link.id = "site-style";
       link.rel = "stylesheet";
-      link.href = href;
+      link.href = href + "?v=5";
 
       link.onload = () => { document.documentElement.style.visibility = "visible"; };
       link.onerror = () => { document.documentElement.style.visibility = "visible"; };
@@ -149,7 +149,7 @@
 
       <article class="service-card">
         <div class="service-media">
-          <img src="Images/2.jpg" class="service-img" alt="American Harp Society">
+          <img src="Images/harpediem.png" class="service-img" alt="American Harp Society">
           <label class="reveal-click" for="svc3" aria-label="Toggle American Harp Society details"></label>
         </div>
 
@@ -227,7 +227,7 @@
     const KEY = "siteStyleHref";
 
     function apply(href) {
-      linkEl.setAttribute("href", href);
+      linkEl.setAttribute("href", href + "?v=5");
       localStorage.setItem(KEY, href);
 
       const isAlt = href === STYLE_B;
