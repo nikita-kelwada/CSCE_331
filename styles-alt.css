@@ -1,7 +1,4 @@
-/* styles-alt.css
-   style 2: dark sketchbook (sidebar + panels)
-*/
-
+ /* style 2 */
 :root{
   --bg:#6e4e40;
   --ink:#f3e7db;
@@ -24,9 +21,14 @@
   --reveal-max:650px;
   --reveal-speed:.28s;
 
-  /* home: "hi my name is nikita" positioning + bio/icon spacing */
-  --hi-top:60px;
-  --hi-right:60px;
+  /* home positioning */
+  --hi-right:-50px;
+  --hi-bottom:180px;        /* typewriter bottom */
+  --bio-right:-50px;        
+  --bio-bottom:-10px;        /* bio box bottom (under typewriter) */
+  --bio-box-w:450px;        /* invisible box width */
+  --bio-box-max:42vw;     
+
   --icons-gap:28px;
 }
 
@@ -207,7 +209,7 @@ body:has(.layout.landing) .layout.landing{
   width:240px;
   height:240px;
   display:block;
-  margin-top:100px;
+  margin-top:0;
   margin-left:0;
   border-radius:50%;
   object-fit:cover;
@@ -215,6 +217,7 @@ body:has(.layout.landing) .layout.landing{
   background:color-mix(in srgb, var(--muted) 50%, transparent);
 }
 
+/* landing intro normal (non-fixed) */
 .layout.landing .intro{
   width:min(820px, 92vw);
   margin:0 auto;
@@ -224,9 +227,10 @@ body:has(.layout.landing) .layout.landing{
   border-radius:0;
 }
 
+/* landing bio text defaults */
 .layout.landing .bio{
-  margin:0 auto;
-  text-align:center;
+  margin:0;
+  text-align:right;
 }
 
 /* icon links */
@@ -248,7 +252,7 @@ body:has(.layout.landing) .layout.landing{
 
 .icon-links a:hover img{ transform:scale(1.07); }
 
-/* hint pill + reveal toggle (shared) */
+
 .hover-hint{
   position:absolute;
   left:12px;
@@ -368,7 +372,7 @@ body:has(.layout.landing) .layout.landing{
 
 .project-card:hover .project-expand,
 .project-body .reveal-toggle:checked ~ .project-expand{
-  max-height:var(--reveal-max);
+  max-height:650px;
   opacity:1;
   padding-top:10px;
 }
@@ -490,7 +494,7 @@ body:has(.layout.landing) .layout.landing{
 
 .service-card:hover .service-expand,
 .service-body .reveal-toggle:checked ~ .service-expand{
-  max-height:var(--reveal-max);
+  max-height:650px;
   opacity:1;
   padding-top:10px;
 }
@@ -519,8 +523,6 @@ body:has(.layout.landing) .layout.landing{
   background:transparent;
   margin-top:6px;
 }
-
-/* qualifications: make "Open" look like a button */
 .resume-viewer-action,
 .qualifications-resume a,
 .resume-viewer a{
@@ -550,7 +552,6 @@ body:has(.layout.landing) .layout.landing{
   color:var(--ink);
 }
 
-/* space between "Resume / Open" row and the pdf viewer */
 .resume-viewer-header{ margin-bottom:14px; }
 
 /* breakpoints */
@@ -590,6 +591,10 @@ body:has(.layout.landing) .layout.landing{
     --gutter:14px;
     --pad-top:44px;
     --content-max:100%;
+    --hi-right:18px;
+    --bio-right:18px;
+    --bio-box-max:86vw;
+    --bio-box-w:560px;
   }
 
   main,
@@ -615,7 +620,6 @@ body:has(.layout.landing) .layout.landing{
   }
 }
 
-/* typewriter (style 2) */
 .typewriter h1{
   display:inline-block;
   overflow:hidden;
@@ -630,11 +634,13 @@ body:has(.layout.landing) .layout.landing{
 @keyframes typing{ from{ width:0; } to{ width:26ch; } }
 @keyframes blink-caret{ from,to{ border-color:transparent; } 50%{ border-color:var(--ink); } }
 
-/* home-only overrides */
+/* =========================
+   HOME ONLY: move typewriter + bio to bottom-right
+   ========================= */
 body:has(.layout.landing) .typewriter h1{
   position:fixed;
-  top:var(--hi-top);
-  right:0px;
+  bottom:var(--hi-bottom);
+  right:var(--hi-right);
   left:auto;
   transform:none;
   margin:0;
@@ -642,6 +648,37 @@ body:has(.layout.landing) .typewriter h1{
   text-align:right;
 }
 
+body:has(.layout.landing) .layout.landing .intro{
+  position:fixed;
+  right:var(--bio-right);
+  bottom:var(--bio-bottom);
+  width:var(--bio-box-w);
+  max-width:var(--bio-box-max);
+  margin:0;
+  padding:0;
+  text-align:right;
+  z-index:998;
+}
+
+body:has(.layout.landing) .layout.landing .bio{
+  margin:0 0 14px;
+  text-align:right;
+}
+body:has(.layout.landing) .layout.landing .bio:last-of-type{
+  margin-bottom:0;
+}
+
 body:has(.layout.landing) .icon-links{
-  margin-top:var(--icons-gap);
+  position:fixed;
+  right:var(--bio-right);   
+  bottom:calc(var(--bio-bottom) - 60px); 
+  justify-content:flex-end;
+  margin:0;
+}
+
+body:has(.layout.landing) .round-square-img{
+  position:fixed;
+  left:50%;
+  top:55%;
+  transform:translate(-50%, -50%);
 }

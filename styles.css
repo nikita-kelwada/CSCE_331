@@ -94,17 +94,14 @@ p,li,a,span,
   transform:translateY(-40px);
 }
 
-.intro{ max-width:520px; }
+.intro{ max-width:390px; }
 
 .name{ font-size:42px; margin:0 0 14px; }
 
 .bio{ color:var(--muted); line-height:1.7; font-size:18px; }
 
 .bio-bold{
-  color:var(--ink);
-  line-height:1.7;
-  font-size:20px;
-  font-weight:bold;
+  display:none;
 }
 
 .round-square-img{
@@ -118,15 +115,17 @@ p,li,a,span,
 .icon-links{
   display:flex;
   align-items:center;
-  gap:18px;
+  gap:20px;
   margin-top:18px;
+  width:90%;            
+  justify-content:center;  
 }
 
 .icon-links a{
   display:flex;
   align-items:center;
   justify-content:center;
-  width:34px;
+  width:30px;
   height:34px;
 }
 
