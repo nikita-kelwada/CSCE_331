@@ -3,9 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Service | Nikita Kelwada</title>
+  <title>Portfolio</title>
 
-  <link rel="stylesheet" href="styles.css" />
+  <!-- load the correct stylesheet BEFORE first paint (prevents flash for styles-alt) -->
+  <script>
+    (function () {
+      const KEY = "siteStyleHref";
+      const STYLE_A = "styles.css";
+      const STYLE_B = "styles-alt.css";
+
+      const saved = localStorage.getItem(KEY);
+      const href = (saved === STYLE_B) ? STYLE_B : STYLE_A;
+
+      const link = document.createElement("link");
+      link.id = "site-style";
+      link.rel = "stylesheet";
+      link.href = href;
+
+      document.head.appendChild(link);
+    })();
+  </script>
 
   <!-- google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,16 +30,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Delicious+Handrawn&display=swap" rel="stylesheet">
 </head>
 
+
 <body>
-  <!-- header -->
   <header class="topbar">
-    <a href="index.html" class="brand">
+    <a href="index.html" class="brand" aria-label="Go to home page">
       <img src="Images/girlonlaptop.png" class="brand-logo" alt="logo">
       <span class="brand-name">nikita kelwada</span>
     </a>
 
-    <nav class="tabs">
-      <a class="tab" href="index.html">Landing</a>
+    <nav class="tabs" aria-label="Primary navigation">
+      <button class="tab style-toggle" id="styleToggle" type="button" aria-pressed="false">
+        Style Change
+      </button>
+
+      <a class="tab" href="index.html">Home</a>
       <a class="tab" href="portfolio.html">Portfolio</a>
       <a class="tab" href="qualifications.html">Qualifications</a>
       <a class="tab active" href="service.html">Service</a>
@@ -30,7 +51,6 @@
     </nav>
   </header>
 
-  <!-- main content -->
   <main class="layout service-wrap">
     <section class="intro">
       <h1 class="name">Service</h1>
@@ -38,160 +58,175 @@
         Community-focused work centered on equity, creativity, education,
         and building inclusive spaces in tech and the arts.
       </p>
+      <p class="bio-bold">
+        Hover Over Images to Learn More!
+      </p>
     </section>
 
     <section class="service-list">
 
-      <!-- tamuhack -->
-      <article class="service-feature">
+      <article class="service-card">
         <div class="service-media">
           <img src="Images/tamuhackhh25.jpg" class="service-img" alt="TAMUhack group photo">
+          <label class="reveal-click" for="svc1" aria-label="Toggle TAMUhack details"></label>
         </div>
 
-        <div class="service-content">
+        <div class="service-body">
           <span class="service-label">Tech Community • Texas A&amp;M</span>
 
           <div class="service-title-row">
             <h2 class="service-title">TAMUhack Organizer</h2>
-
-            <a
-              class="service-link-icon"
-              href="https://tamuhack.org/"
-              target="_blank"
-              rel="noopener"
-              aria-label="TAMUhack website"
-              title="Open website"
-            >
+            <a class="service-link-icon" href="https://tamuhack.org/" target="_blank" rel="noopener noreferrer" aria-label="TAMUhack website">
               <img src="Images/websitelink.png" alt="Website link icon">
             </a>
           </div>
 
-          <p class="service-desc">
-            TAMUhack is Texas A&amp;M’s largest annual hackathon, bringing together
-            hundreds of students to learn, collaborate, and build impactful projects.
-          </p>
+          <input class="reveal-toggle" type="checkbox" id="svc1">
 
-          <ul class="service-bullets">
-            <li>Support logistics and operations for a multi-day hackathon.</li>
-            <li>Coordinate with sponsors, mentors, and organizers.</li>
-            <li>Help create an inclusive and welcoming environment for all participants.</li>
-          </ul>
+          <div class="service-expand">
+            <p class="service-desc">
+              TAMUhack is Texas A&amp;M’s largest annual hackathon, bringing together
+              hundreds of students to learn, collaborate, and build impactful projects.
+            </p>
+
+            <ul class="service-bullets">
+              <li>Support logistics and operations for a multi-day hackathon.</li>
+              <li>Coordinate with sponsors, mentors, and organizers.</li>
+              <li>Help create an inclusive and welcoming environment for all participants.</li>
+            </ul>
+          </div>
         </div>
       </article>
 
-      <!-- see -->
-      <article class="service-feature reverse">
+      <article class="service-card">
         <div class="service-media">
           <img src="Images/see.png" class="service-img" alt="Students for Equity through Education">
+          <label class="reveal-click" for="svc2" aria-label="Toggle Students for Equity details"></label>
         </div>
 
-        <div class="service-content">
+        <div class="service-body">
           <span class="service-label">Nonprofit Leadership</span>
 
           <div class="service-title-row">
             <h2 class="service-title">Students for Equity (S.E.E.)</h2>
-
-            <a
-              class="service-link-icon"
-              href="https://www.instagram.com/stu4equity/"
-              target="_blank"
-              rel="noopener"
-              aria-label="Students for Equity Instagram"
-              title="Open Instagram"
-            >
+            <a class="service-link-icon" href="https://www.instagram.com/stu4equity/" target="_blank" rel="noopener noreferrer" aria-label="Students for Equity Instagram">
               <img src="Images/websitelink.png" alt="Website link icon">
             </a>
           </div>
 
-          <p class="service-desc">
-            A DFW-based student nonprofit focused on raising awareness around
-            racial, ethnic, sexual, and financial accessibility issues in education.
-          </p>
+          <input class="reveal-toggle" type="checkbox" id="svc2">
 
-          <ul class="service-bullets">
-            <li>Head Director of the Racial/Ethnic Affairs Committee.</li>
-            <li>Led a team of ~10 students across the DFW area.</li>
-            <li>Organized donation drives collecting $6,000 in books and $500 in food.</li>
-          </ul>
+          <div class="service-expand">
+            <p class="service-desc">
+              A DFW-based student nonprofit focused on raising awareness around
+              racial, ethnic, sexual, and financial accessibility issues in education.
+            </p>
+
+            <ul class="service-bullets">
+              <li>Head Director of the Racial/Ethnic Affairs Committee.</li>
+              <li>Led a team of ~10 students across the DFW area.</li>
+              <li>Organized donation drives collecting $6,000 in books and $500 in food.</li>
+            </ul>
+          </div>
         </div>
       </article>
 
-      <!-- ahs -->
-      <article class="service-feature">
+      <article class="service-card">
         <div class="service-media">
           <img src="Images/harpediem.png" class="service-img" alt="American Harp Society">
+          <label class="reveal-click" for="svc3" aria-label="Toggle American Harp Society details"></label>
         </div>
 
-        <div class="service-content">
+        <div class="service-body">
           <span class="service-label">Arts &amp; Outreach</span>
 
-          <!-- made this match the other cards -->
           <div class="service-title-row">
             <h2 class="service-title">American Harp Society Ambassador</h2>
-
-            <a
-              class="service-link-icon"
-              href="https://www.harpsociety.org/"
-              target="_blank"
-              rel="noopener"
-              aria-label="AHS website"
-              title="Open website"
-            >
+            <a class="service-link-icon" href="https://www.harpsociety.org/" target="_blank" rel="noopener noreferrer" aria-label="American Harp Society website">
               <img src="Images/websitelink.png" alt="Website link icon">
             </a>
           </div>
 
-          <p class="service-desc">
-            As a Dallas Chapter Ambassador, I represented the local chapter
-            at national-level events and performances.
-          </p>
+          <input class="reveal-toggle" type="checkbox" id="svc3">
 
-          <ul class="service-bullets">
-            <li>Selected as one of three ambassadors for the Dallas chapter.</li>
-            <li>Performed in Sioux Falls, South Dakota.</li>
-            <li>Sponsored to attend and present at the National Harp Conference.</li>
-          </ul>
+          <div class="service-expand">
+            <p class="service-desc">
+              As a Dallas Chapter Ambassador, I represented the local chapter
+              at national-level events and performances.
+            </p>
+
+            <ul class="service-bullets">
+              <li>Selected as one of three ambassadors for the Dallas chapter.</li>
+              <li>Performed in Sioux Falls, South Dakota.</li>
+              <li>Sponsored to attend and present at the National Harp Conference.</li>
+            </ul>
+          </div>
         </div>
       </article>
 
-      <!-- illuminating voices -->
-      <article class="service-feature reverse">
+      <article class="service-card">
         <div class="service-media">
           <img src="Images/illuminatingvoices.png" class="service-img" alt="Illuminating Voices nonprofit">
+          <label class="reveal-click" for="svc4" aria-label="Toggle Illuminating Voices details"></label>
         </div>
 
-        <div class="service-content">
+        <div class="service-body">
           <span class="service-label">Design &amp; Advocacy</span>
 
           <div class="service-title-row">
             <h2 class="service-title">Illuminating Voices</h2>
-
-            <a
-              class="service-link-icon"
-              href="https://www.instagram.com/illuminatingvoices/"
-              target="_blank"
-              rel="noopener"
-              aria-label="Illuminating Voices Instagram"
-              title="Open Instagram"
-            >
+            <a class="service-link-icon" href="https://www.instagram.com/illuminatingvoices/" target="_blank" rel="noopener noreferrer" aria-label="Illuminating Voices Instagram">
               <img src="Images/websitelink.png" alt="Website link icon">
             </a>
           </div>
 
-          <p class="service-desc">
-            A nonprofit dedicated to sharing accessible information on current events
-            through visual storytelling.
-          </p>
+          <input class="reveal-toggle" type="checkbox" id="svc4">
 
-          <ul class="service-bullets">
-            <li>Designed graphics condensing complex topics into engaging visuals.</li>
-            <li>Worked under tight deadlines in a fast-paced environment.</li>
-            <li>Strengthened adaptability, creativity, and time management skills.</li>
-          </ul>
+          <div class="service-expand">
+            <p class="service-desc">
+              A nonprofit dedicated to sharing accessible information on current events
+              through visual storytelling.
+            </p>
+
+            <ul class="service-bullets">
+              <li>Designed graphics condensing complex topics into engaging visuals.</li>
+              <li>Worked under tight deadlines in a fast-paced environment.</li>
+              <li>Strengthened adaptability, creativity, and time management skills.</li>
+            </ul>
+          </div>
         </div>
       </article>
 
     </section>
   </main>
+
+  <script>
+  (() => {
+    const linkEl = document.getElementById("site-style");
+    const btn = document.getElementById("styleToggle");
+    if (!linkEl || !btn) return;
+
+    const STYLE_A = "styles.css";
+    const STYLE_B = "styles-alt.css";
+    const KEY = "siteStyleHref";
+
+    function apply(href) {
+      linkEl.setAttribute("href", href);
+      localStorage.setItem(KEY, href);
+
+      const isAlt = href === STYLE_B;
+      btn.setAttribute("aria-pressed", String(isAlt));
+      btn.textContent = isAlt ? "Original Style" : "Style Change";
+    }
+
+    const saved = localStorage.getItem(KEY);
+    apply(saved === STYLE_B ? STYLE_B : STYLE_A);
+
+    btn.addEventListener("click", () => {
+      const current = linkEl.getAttribute("href");
+      apply(current === STYLE_B ? STYLE_A : STYLE_B);
+    });
+  })();
+  </script>
 </body>
 </html>

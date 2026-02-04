@@ -71,14 +71,36 @@ p,li,a,span,
   flex-wrap:wrap;
 }
 
+/* ✅ make <a> and <button> tabs look identical */
 .tab{
+  font:inherit;
   text-decoration:none;
   color:var(--ink);
   padding:18px 12px;
   font-size:20px;
   transition:transform .2s ease;
+  background:transparent;
+  border:0;
+  outline:0;
+  cursor:pointer;
+  -webkit-appearance:none;
+  appearance:none;
+  box-shadow:none;
+  display:inline-block;
+  line-height:1;
 }
+
+/* also remove the “button box” in Safari/Chrome */
+.tab:focus{ outline:none; }
+
 .tab:hover{ transform:scale(1.1); }
+
+/* optional: make keyboard focus still visible but subtle */
+.tab:focus-visible{
+  outline:2px solid rgba(0,0,0,.25);
+  outline-offset:4px;
+  border-radius:10px;
+}
 
 /* =========
    base layout (landing + shared)
@@ -114,6 +136,13 @@ p,li,a,span,
   color:var(--muted);
   line-height:1.7;
   font-size:18px;
+}
+
+.bio-bold{
+  color:var(--ink);
+  line-height:1.7;
+  font-size:20px;
+  font-weight: bold; 
 }
 
 /* landing image */
@@ -156,7 +185,7 @@ p,li,a,span,
 }
 
 /* =========
-   portfolio
+   portfolio (original structure)
    ========= */
 .portfolio-list{
   display:flex;
@@ -182,6 +211,7 @@ p,li,a,span,
   display:flex;
   align-items:center;
   justify-content:center;
+  position:relative;
 }
 
 .project-img{
@@ -233,6 +263,13 @@ p,li,a,span,
   margin-top:12px;
 }
 
+.project-links a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+}
+
 .project-links img{
   width:22px;
   height:22px;
@@ -242,13 +279,69 @@ p,li,a,span,
   transition:transform .2s ease, opacity .2s ease;
 }
 
-.project-links img:hover{
+.project-links a:hover img{
   opacity:1;
   transform:translateY(-2px);
 }
 
 /* =========
-   service
+   portfolio (NEW structure compatibility: .project-card)
+   ========= */
+.project-card{
+  display:grid;
+  grid-template-columns:560px 1fr;
+  gap:40px;
+  align-items:center;
+}
+
+.project-card .project-media{
+  width:560px;
+  height:320px;
+}
+
+.project-card .project-img{
+  object-fit:contain;
+}
+
+.project-body{
+  max-width:520px;
+  position:relative;
+}
+
+.project-meta{ margin-bottom:6px; }
+
+.project-title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.project-title-row .project-name{
+  margin:0 0 10px;
+}
+
+.project-expand{
+  margin-top:10px;
+  max-height:none;
+  opacity:1;
+  overflow:visible;
+}
+
+/* don’t show alt-style hover pill in style 1 */
+.hover-hint{ display:none !important; }
+
+/* hide the click overlay in style 1 */
+.reveal-click{ display:none; }
+
+.reveal-toggle{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+/* =========
+   service (original structure)
    ========= */
 .service-list{
   display:flex;
@@ -273,7 +366,7 @@ p,li,a,span,
   grid-template-columns:1fr minmax(0,520px);
 }
 
-/* square image frame (consistent for every card) */
+/* square image frame */
 .service-media{
   width:320px;
   aspect-ratio:1 / 1;
@@ -283,9 +376,9 @@ p,li,a,span,
   margin:0 auto;
   box-shadow:var(--shadow-soft);
   background:transparent;
+  position:relative;
 }
 
-/* image fills the square (no white border, no weird offsets) */
 .service-img{
   width:100%;
   height:100%;
@@ -314,7 +407,6 @@ p,li,a,span,
   margin:0 0 10px;
 }
 
-/* link icon next to title */
 .service-link-icon{
   display:inline-flex;
   align-items:center;
@@ -344,6 +436,49 @@ p,li,a,span,
   opacity:1;
   transform:translateY(-2px);
 }
+
+/* =========
+   service (NEW structure compatibility: .service-card)
+   ========= */
+.service-card{
+  display:grid;
+  grid-template-columns:minmax(0,520px) 1fr;
+  gap:24px;
+  align-items:center;
+  padding:22px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:var(--card);
+  box-shadow:var(--shadow-soft);
+}
+
+.service-card .service-media{
+  width:320px;
+  aspect-ratio:1 / 1;
+  margin:0 auto;
+}
+
+.service-body{
+  max-width:560px;
+  position:relative;
+}
+
+.service-expand{
+  margin-top:10px;
+  max-height:none;
+  opacity:1;
+  overflow:visible;
+}
+
+.service-bullets{
+  margin:10px 0 0;
+  padding-left:18px;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+/* hide alt-style click overlay in style 1 */
+.service-media .reveal-click{ display:none; }
 
 /* =========
    qualifications
@@ -465,21 +600,25 @@ p,li,a,span,
   }
 
   .project-feature,
-  .project-feature.reverse{
+  .project-feature.reverse,
+  .project-card{
     grid-template-columns:1fr;
   }
 
-  .project-media{
+  .project-media,
+  .project-card .project-media{
     width:100%;
     height:240px;
   }
 
   .service-feature,
-  .service-feature.reverse{
+  .service-feature.reverse,
+  .service-card{
     grid-template-columns:1fr;
   }
 
-  .service-media{
+  .service-media,
+  .service-card .service-media{
     width:min(360px, 90vw);
   }
 

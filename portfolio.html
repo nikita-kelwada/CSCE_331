@@ -5,9 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio</title>
 
-  <link rel="stylesheet" href="styles.css" />
+  <!-- load the correct stylesheet BEFORE first paint (prevents flash for styles-alt) -->
+  <script>
+    (function () {
+      const KEY = "siteStyleHref";
+      const STYLE_A = "styles.css";
+      const STYLE_B = "styles-alt.css";
 
-  <!-- Stylesheet pages and links to fonts -->
+      const saved = localStorage.getItem(KEY);
+      const href = (saved === STYLE_B) ? STYLE_B : STYLE_A;
+
+      const link = document.createElement("link");
+      link.id = "site-style";
+      link.rel = "stylesheet";
+      link.href = href;
+
+      document.head.appendChild(link);
+    })();
+  </script>
+
+  <!-- google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Delicious+Handrawn&display=swap" rel="stylesheet">
@@ -15,133 +32,181 @@
 
 
 <body>
-  <!-- header top left -->
   <header class="topbar">
-    <a href="index.html" class="brand">
+    <a href="index.html" class="brand" aria-label="Go to landing page">
       <img src="Images/girlonlaptop.png" class="brand-logo" alt="logo">
       <span class="brand-name">nikita kelwada</span>
     </a>
 
-    <nav class="tabs">
-      <a class="tab" href="index.html">Landing</a>
-      <a class="tab" href="portfolio.html">Portfolio</a>
+    <nav class="tabs" aria-label="Primary navigation">
+      <button class="tab style-toggle" id="styleToggle" type="button" aria-pressed="false">
+        Style Change
+      </button>
+
+      <a class="tab" href="index.html">Home</a>
+      <a class="tab active" href="portfolio.html">Portfolio</a>
       <a class="tab" href="qualifications.html">Qualifications</a>
       <a class="tab" href="service.html">Service</a>
       <a class="tab" href="genai.html">AI</a>
     </nav>
   </header>
 
-  <!-- main content -->
   <main class="layout portfolio-wrap">
     <section class="intro">
       <h1 class="name">Portfolio</h1>
       <p class="bio">
         A selection of projects I’ve built through coursework, hackathons, and personal exploration.
       </p>
+      <p class="bio-bold">
+        Hover Over Images to Learn More!
+      </p>
     </section>
 
     <section class="portfolio-list">
 
-      <!-- Echo -->
-      <article class="project-feature">
+      <!-- echo -->
+      <article class="project-card">
         <div class="project-media">
           <img src="Images/echo.jpg" class="project-img" alt="Echo project">
+          <label class="reveal-click" for="p1" aria-label="Toggle Echo details"></label>
         </div>
 
-        <div class="project-content">
-          <div class="project-topline">
+        <div class="project-body">
+          <div class="project-meta">
             <span class="project-year">2024</span>
           </div>
 
-          <h2 class="project-name">Echo</h2>
-          <p class="project-desc">
-            A computer vision–based game designed to help children with alexithymia recognize emotions.
-            Implemented real-time facial analysis and machine learning models with a Flask backend and
-            a React/Next.js frontend.
-          </p>
+          <div class="project-title-row">
+            <h2 class="project-name">Echo</h2>
 
-          <div class="project-links">
-  <a
-    href="https://github.com/chaireko/hackutd24"
-    target="_blank"
-    aria-label="Echo GitHub Repository"
-  >
-    <img src="Images/github.png" alt="GitHub icon">
-  </a>
+            <div class="project-links" aria-label="Project links">
+              <a href="https://github.com/chaireko/hackutd24" target="_blank" rel="noopener noreferrer" aria-label="Echo GitHub">
+                <img src="Images/github.png" alt="GitHub icon">
+              </a>
+              <a href="https://devpost.com/software/hackutd-project-kbhins" target="_blank" rel="noopener noreferrer" aria-label="Echo Devpost">
+                <img src="Images/devpost.png" alt="Devpost icon">
+              </a>
+            </div>
+          </div>
 
-  <a
-    href="https://devpost.com/software/hackutd-project-kbhins"
-    target="_blank"
-    aria-label="Echo Devpost"
-  >
-    <img src="Images/devpost.png" alt="Devpost icon">
-  </a>
-</div>
+          <input class="reveal-toggle" type="checkbox" id="p1">
 
+          <div class="project-expand">
+            <p class="project-desc">
+              A computer vision based game designed to help children with alexithymia recognize emotions.
+              Implemented real time facial analysis and machine learning models with a Flask backend and
+              a React/Next.js frontend.
+            </p>
 
-          <div class="tag-row">
-            <span class="tag">Python</span>
-            <span class="tag">Flask</span>
-            <span class="tag">React</span>
-            <span class="tag">Computer Vision</span>
+            <div class="tag-row">
+              <span class="tag">Python</span>
+              <span class="tag">Flask</span>
+              <span class="tag">React</span>
+              <span class="tag">Computer Vision</span>
+            </div>
           </div>
         </div>
       </article>
 
-      <!-- ProjectUX -->
-      <article class="project-feature reverse">
+      <!-- projectux -->
+      <article class="project-card">
         <div class="project-media">
           <img src="Images/ProjectUX.png" class="project-img" alt="ProjectUX">
+          <label class="reveal-click" for="p2" aria-label="Toggle ProjectUX details"></label>
         </div>
 
-        <div class="project-content">
-          <div class="project-topline">
+        <div class="project-body">
+          <div class="project-meta">
             <span class="project-year">2024–2025</span>
           </div>
 
-          <h2 class="project-name">ProjectUX</h2>
-          <p class="project-desc">
-            Founded and co-managed a 75-person full-stack engineering project. Led architecture
-            decisions, established CI checks and GitHub workflows, and delivered weekly React labs
-            with structured mentorship.
-          </p>
+          <div class="project-title-row">
+            <h2 class="project-name">ProjectUX</h2>
+          </div>
 
-          <div class="tag-row">
-            <span class="tag">React</span>
-            <span class="tag">Node.js</span>
-            <span class="tag">PostgreSQL</span>
-            <span class="tag">Leadership</span>
+          <input class="reveal-toggle" type="checkbox" id="p2">
+
+          <div class="project-expand">
+            <p class="project-desc">
+              Founded and co managed a 75 person full stack engineering project. Led architecture
+              decisions, established CI checks and GitHub workflows, and delivered weekly React labs
+              with structured mentorship.
+            </p>
+
+            <div class="tag-row">
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Leadership</span>
+            </div>
           </div>
         </div>
       </article>
 
-      <!-- Web Scraping -->
-      <article class="project-feature">
+      <!-- web scraping -->
+      <article class="project-card">
         <div class="project-media">
           <img src="Images/webscraping.png" class="project-img" alt="Web scraping pipeline">
+          <label class="reveal-click" for="p3" aria-label="Toggle Web Scraping details"></label>
         </div>
 
-        <div class="project-content">
-          <div class="project-topline">
+        <div class="project-body">
+          <div class="project-meta">
             <span class="project-year">2025</span>
           </div>
 
-          <h2 class="project-name">Distributed Web Scraping Pipeline</h2>
-          <p class="project-desc">
-            Built a distributed data pipeline to scrape and process structured web data at scale,
-            featuring retry logic, validation, and MongoDB storage.
-          </p>
+          <div class="project-title-row">
+            <h2 class="project-name">Distributed Web Scraping Pipeline</h2>
+          </div>
 
-          <div class="tag-row">
-            <span class="tag">Python</span>
-            <span class="tag">MongoDB</span>
-            <span class="tag">Async Systems</span>
-            <span class="tag">Data Pipelines</span>
+          <input class="reveal-toggle" type="checkbox" id="p3">
+
+          <div class="project-expand">
+            <p class="project-desc">
+              Built a distributed data pipeline to scrape and process structured web data at scale,
+              featuring retry logic, validation, and MongoDB storage.
+            </p>
+
+            <div class="tag-row">
+              <span class="tag">Python</span>
+              <span class="tag">MongoDB</span>
+              <span class="tag">Async Systems</span>
+              <span class="tag">Data Pipelines</span>
+            </div>
           </div>
         </div>
       </article>
 
     </section>
   </main>
+
+  <script>
+  (() => {
+    const linkEl = document.getElementById("site-style");
+    const btn = document.getElementById("styleToggle");
+    if (!linkEl || !btn) return;
+
+    const STYLE_A = "styles.css";
+    const STYLE_B = "styles-alt.css";
+    const KEY = "siteStyleHref";
+
+    function apply(href) {
+      linkEl.setAttribute("href", href);
+      localStorage.setItem(KEY, href);
+
+      const isAlt = href === STYLE_B;
+      btn.setAttribute("aria-pressed", String(isAlt));
+      btn.textContent = isAlt ? "Original Style" : "Style Change";
+    }
+
+    const saved = localStorage.getItem(KEY);
+    apply(saved === STYLE_B ? STYLE_B : STYLE_A);
+
+    btn.addEventListener("click", () => {
+      const current = linkEl.getAttribute("href");
+      apply(current === STYLE_B ? STYLE_A : STYLE_B);
+    });
+  })();
+  </script>
 </body>
 </html>

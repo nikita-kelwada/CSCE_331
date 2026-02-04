@@ -5,47 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfolio</title>
 
-  <link rel="stylesheet" href="styles.css" />
+  <!-- load the correct stylesheet BEFORE first paint (prevents flash for styles-alt) -->
+  <script>
+    (function () {
+      const KEY = "siteStyleHref";
+      const STYLE_A = "styles.css";
+      const STYLE_B = "styles-alt.css";
 
-  <!-- Google Fonts: body + headers -->
+      const saved = localStorage.getItem(KEY);
+      const href = (saved === STYLE_B) ? STYLE_B : STYLE_A;
+
+      const link = document.createElement("link");
+      link.id = "site-style";
+      link.rel = "stylesheet";
+      link.href = href;
+
+      document.head.appendChild(link);
+    })();
+  </script>
+
+  <!-- google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Delicious+Handrawn&display=swap" rel="stylesheet">
 </head>
 
+
 <body>
+  <!-- header -->
+  <header class="topbar">
+    <a href="index.html" class="brand" aria-label="Go to landing page">
+      <img
+        src="Images/girlonlaptop.png"
+        class="brand-logo"
+        alt="Personal logo"
+      >
+      <span class="brand-name">nikita kelwada</span>
+    </a>
 
-  <!-- Header -->
-<header class="topbar">
-  <a href="index.html" class="brand" aria-label="Go to landing page">
-    <img
-      src="Images/girlonlaptop.png"
-      class="brand-logo"
-      alt="Personal logo"
-    >
-    <span class="brand-name">nikita kelwada</span>
-  </a>
+    <!-- navigation -->
+    <nav class="tabs" aria-label="Primary navigation">
 
-  <!-- Navigation -->
-  <nav class="tabs" aria-label="Primary navigation">
-    <a class="tab" href="index.html">Landing</a>
-    <a class="tab" href="portfolio.html">Portfolio</a>
-    <a class="tab" href="qualifications.html">Qualifications</a>
-    <a class="tab" href="service.html">Service</a>
-    <a class="tab" href="genai.html">AI</a>
-  </nav>
-</header>
+  <button class="tab style-toggle" id="styleToggle" type="button" aria-pressed="false">
+    Style Change
+  </button>
+
+  <a class="tab active" href="index.html">Home</a>
+
+  <a class="tab" href="portfolio.html">Portfolio</a>
+  <a class="tab" href="qualifications.html">Qualifications</a>
+  <a class="tab" href="service.html">Service</a>
+  <a class="tab" href="genai.html">AI</a>
+</nav>
 
 
-  <!--main content -->
+  </header>
+
+  <!-- main content -->
   <main class="qualifications-page">
-
-    <!-- makes 2 columns-->
+    <!-- makes 2 columns -->
     <section class="qualifications-layout">
 
-      <!--- text on the left -->
+      <!-- text on the left -->
       <section class="qualifications-text">
-
         <h1 class="qual-title">Resume + Skills</h1>
 
         <p class="qual-paragraph">
@@ -61,7 +83,7 @@
           user-focused technical solutions.
         </p>
 
-        <!-- Skills explanation -->
+        <!-- skills explanation -->
         <div class="skills-block">
           <h2 class="skills-title">Technical Skills</h2>
 
@@ -72,40 +94,61 @@
             <li><strong>Concepts:</strong> Data structures, debugging, version control</li>
           </ul>
         </div>
-
       </section>
 
-      <!-- right column pdf ===== -->
+      <!-- right column pdf -->
       <section class="qualifications-resume">
-
-        <!-- Viewer card -->
         <div class="resume-viewer">
-
-          <!-- Viewer header  -->
           <div class="resume-viewer-header">
             <span class="resume-viewer-title">Resume</span>
             <a
               class="resume-viewer-action"
               href="Images/Nikita_Kelwada_Resume.pdf"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
             >
               Open
             </a>
           </div>
 
-          <!-- Embedded PDF (NOTE : MAKE SURE IT WORKS ON INCONITO)-->
           <iframe
             class="resume-iframe"
             src="Images/Nikita_Kelwada_Resume.pdf"
             title="Embedded Resume PDF"
           ></iframe>
-
         </div>
       </section>
 
     </section>
   </main>
 
+  <script>
+  (() => {
+    const linkEl = document.getElementById("site-style");
+    const btn = document.getElementById("styleToggle");
+    if (!linkEl || !btn) return;
+
+    const STYLE_A = "styles.css";
+    const STYLE_B = "styles-alt.css";
+    const KEY = "siteStyleHref";
+
+    function apply(href) {
+      linkEl.setAttribute("href", href);
+      localStorage.setItem(KEY, href);
+
+      const isAlt = href === STYLE_B;
+      btn.setAttribute("aria-pressed", String(isAlt));
+      btn.textContent = isAlt ? "Original Style" : "Style Change";
+    }
+
+    const saved = localStorage.getItem(KEY);
+    apply(saved === STYLE_B ? STYLE_B : STYLE_A);
+
+    btn.addEventListener("click", () => {
+      const current = linkEl.getAttribute("href");
+      apply(current === STYLE_B ? STYLE_A : STYLE_B);
+    });
+  })();
+  </script>
 </body>
 </html>

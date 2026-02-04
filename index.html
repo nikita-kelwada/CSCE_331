@@ -5,25 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nikita Kelwada | Landing</title>
 
-  <!-- Stylesheet pages and links to fonts -->
-  <link rel="stylesheet" href="styles.css" />
+  <!-- load the correct stylesheet BEFORE first paint (no flash), without document.write -->
+  <script>
+    (function () {
+      const KEY = "siteStyleHref";
+      const STYLE_A = "styles.css";
+      const STYLE_B = "styles-alt.css";
 
+      const saved = localStorage.getItem(KEY);
+      const href = (saved === STYLE_B) ? STYLE_B : STYLE_A;
+
+      const link = document.createElement("link");
+      link.id = "site-style";
+      link.rel = "stylesheet";
+      link.href = href;
+
+      // insert as early as possible in <head>
+      const head = document.head;
+      head.insertBefore(link, head.firstChild);
+    })();
+  </script>
+
+  <!-- google fonts (only the ones you use) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap" rel="stylesheet">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Delicious+Handrawn&display=swap" rel="stylesheet">
 </head>
 
+
 <body>
-  <!-- Header -->
+  <!-- header -->
   <header class="topbar">
-    <!--Top Left corner with logo and my name -->
+    <!-- top left corner with logo and my name -->
     <a href="index.html" class="brand" aria-label="Go to landing page">
       <img
         src="Images/girlonlaptop.png"
@@ -33,19 +46,27 @@
       <span class="brand-name">nikita kelwada</span>
     </a>
 
-    <!-- Navigation top right pages (landing will link to home)-->
+    <!-- navigation top right pages -->
     <nav class="tabs" aria-label="Primary navigation">
-      <a class="tab" href="index.html">Landing</a>
-      <a class="tab" href="portfolio.html">Portfolio</a>
-      <a class="tab" href="qualifications.html">Qualifications</a>
-      <a class="tab" href="service.html">Service</a>
-      <a class="tab" href="genai.html">AI</a>
-    </nav>
+
+  <button class="tab style-toggle" id="styleToggle" type="button" aria-pressed="false">
+    Style Change
+  </button>
+
+  <a class="tab active" href="index.html">Home</a>
+
+  <a class="tab" href="portfolio.html">Portfolio</a>
+  <a class="tab" href="qualifications.html">Qualifications</a>
+  <a class="tab" href="service.html">Service</a>
+  <a class="tab" href="genai.html">AI</a>
+</nav>
+
+
   </header>
 
-  <!-- Main content of index -->
+  <!-- main content of index -->
   <main class="layout landing">
-    <!-- LEFT: image -->
+    <!-- left: image -->
     <section aria-label="Headshot">
       <img
         src="Images/girlonlaptop.png"
@@ -54,9 +75,9 @@
       >
     </section>
 
-    <!-- Intro text on right side of image -->
+    <!-- intro text on right side of image -->
     <section class="intro" aria-label="Introduction">
-      <!-- Typewriter wrapper -->
+      <!-- typewriter wrapper -->
       <div class="typewriter">
         <h1 class="name">hi, my name is nikita!</h1>
       </div>
@@ -71,28 +92,56 @@
       </p>
 
       <div class="icon-links">
-  <!-- Resume Link -->
-  <a href="Images/Nikita_Kelwada_Resume.pdf" target="_blank" rel = "noopener noreferrer" aria-label="Resume">
-    <img src="Images/resume.png" alt="Resume icon">
-  </a>
+        <!-- resume link -->
+        <a href="Images/Nikita_Kelwada_Resume.pdf" target="_blank" rel="noopener noreferrer" aria-label="Resume">
+          <img src="Images/resume.png" alt="Resume icon">
+        </a>
 
-  <!-- Email -->
-  <a href="mailto:nikita.kelwada.01@gmail.com" aria-label="Email">
-    <img src="Images/mail.png" alt="Email icon">
-  </a>
+        <!-- email -->
+        <a href="mailto:nikita.kelwada.01@gmail.com" aria-label="Email">
+          <img src="Images/mail.png" alt="Email icon">
+        </a>
 
-  <!-- LinkedIn -->
-  <a href="https://www.linkedin.com/in/nikita-kelwada" target="_blank" aria-label="LinkedIn">
-    <img src="Images/linkedin.png" alt="LinkedIn icon">
-  </a>
+        <!-- linkedin -->
+        <a href="https://www.linkedin.com/in/nikita-kelwada" target="_blank" aria-label="LinkedIn" rel="noopener noreferrer">
+          <img src="Images/linkedin.png" alt="LinkedIn icon">
+        </a>
 
-  <!-- GitHub -->
-  <a href="https://github.com/nikita-kelwada" target="_blank" aria-label="GitHub">
-    <img src="Images/github.png" alt="GitHub icon">
-  </a>
-</div>
-
+        <!-- github -->
+        <a href="https://github.com/nikita-kelwada" target="_blank" aria-label="GitHub" rel="noopener noreferrer">
+          <img src="Images/github.png" alt="GitHub icon">
+        </a>
+      </div>
     </section>
   </main>
+
+  <script>
+  (() => {
+    const linkEl = document.getElementById("site-style");
+    const btn = document.getElementById("styleToggle");
+    if (!linkEl || !btn) return;
+
+    const STYLE_A = "styles.css";
+    const STYLE_B = "styles-alt.css";
+    const KEY = "siteStyleHref";
+
+    function apply(href) {
+      linkEl.setAttribute("href", href);
+      localStorage.setItem(KEY, href);
+
+      const isAlt = href === STYLE_B;
+      btn.setAttribute("aria-pressed", String(isAlt));
+      btn.textContent = isAlt ? "Original Style" : "Style Change";
+    }
+
+    const saved = localStorage.getItem(KEY);
+    apply(saved === STYLE_B ? STYLE_B : STYLE_A);
+
+    btn.addEventListener("click", () => {
+      const current = linkEl.getAttribute("href");
+      apply(current === STYLE_B ? STYLE_A : STYLE_B);
+    });
+  })();
+  </script>
 </body>
 </html>

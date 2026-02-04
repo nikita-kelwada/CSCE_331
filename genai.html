@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI | Nikita Kelwada</title>
 
-  <!-- Fonts Used -->
+  <!-- fonts used -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Delicious+Handrawn&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
       background:var(--bg);
     }
 
-    /* ===== Header / Nav (same structure as other pages) ===== */
+    /* header / nav (same structure as other pages) */
     .topbar{
       display:flex;
       align-items:center;
@@ -54,17 +54,21 @@
       font-size:20px;
       display:inline-block;
       transition:transform .2s ease;
+      background:transparent;
+      border:none;
+      font-family:inherit;
+      cursor:pointer;
     }
     .tab:hover{ transform:scale(1.10); }
 
-    /* ===== Page wrapper ===== */
+    /* page wrapper */
     main{
       max-width:1100px;
       margin:0 auto;
       padding:18px 28px 70px;
     }
 
-    /* ===== Hero ===== */
+    /* hero */
     .hero{
       display:grid;
       grid-template-columns: 1.1fr .9fr;
@@ -139,7 +143,7 @@
       border-radius:12px;
     }
 
-    /* ===== Quick facts strip ===== */
+    /* quick facts strip */
     .facts{
       margin-top:18px;
       display:grid;
@@ -163,7 +167,7 @@
       line-height:1.2;
     }
 
-    /* ===== Section styling ===== */
+    /* section styling */
     .section{
       margin-top:44px;
     }
@@ -181,7 +185,7 @@
       max-width:70ch;
     }
 
-    /* ===== Services ===== */
+    /* services */
     .cards{
       display:grid;
       grid-template-columns: repeat(4, minmax(0,1fr));
@@ -223,7 +227,7 @@
       background:#fff;
     }
 
-    /* ===== Gallery ===== */
+    /* gallery */
     .gallery{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -256,7 +260,7 @@
       margin-bottom:4px;
     }
 
-    /* ===== Repertoire (details) ===== */
+    /* repertoire (details) */
     details{
       background:#fff;
       border:2px solid rgba(0,0,0,.45);
@@ -288,7 +292,7 @@
       line-height:1.8;
     }
 
-    /* ===== Highlights ===== */
+    /* highlights */
     .two-col{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -315,7 +319,7 @@
       color:var(--muted);
     }
 
-    /* ===== Contact ===== */
+    /* contact */
     .contact-grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
@@ -334,15 +338,7 @@
       margin:0;
     }
 
-    /* ===== Prompt sections ===== */
-    .prompt-evo{
-      border-left:4px solid rgba(0,0,0,.35);
-      padding-left:14px;
-      margin-top:10px;
-      color:var(--muted);
-      line-height:1.8;
-      font-size:16px;
-    }
+    /* prompt sections */
     .prompt-box{
       margin-top:12px;
       background:#fff;
@@ -372,7 +368,7 @@
       resize:vertical;
     }
 
-    /* ===== Responsive ===== */
+    /* responsive */
     @media (max-width: 980px){
       .hero{ grid-template-columns:1fr; }
       .facts{ grid-template-columns: repeat(2, minmax(0,1fr)); }
@@ -396,7 +392,7 @@
 </head>
 
 <body>
-  <!-- HEADER -->
+  <!-- header -->
   <header class="topbar">
     <a href="index.html" class="brand" aria-label="Go to landing page">
       <img src="Images/girlonlaptop.png" class="brand-logo" alt="Personal logo">
@@ -404,16 +400,24 @@
     </a>
 
     <nav class="tabs" aria-label="Primary navigation">
-      <a class="tab" href="index.html">Landing</a>
-      <a class="tab" href="portfolio.html">Portfolio</a>
-      <a class="tab" href="qualifications.html">Qualifications</a>
-      <a class="tab" href="service.html">Service</a>
-      <a class="tab" href="genai.html">AI</a>
-    </nav>
+
+  <button class="tab style-toggle" id="styleToggle" type="button" aria-pressed="false">
+    Style Change
+  </button>
+
+  <a class="tab active" href="index.html">Home</a>
+
+  <a class="tab" href="portfolio.html">Portfolio</a>
+  <a class="tab" href="qualifications.html">Qualifications</a>
+  <a class="tab" href="service.html">Service</a>
+  <a class="tab" href="genai.html">AI</a>
+</nav>
+
+
   </header>
 
   <main>
-    <!-- HERO -->
+    <!-- hero -->
     <section class="hero" aria-label="Harp and piano booking hero">
       <div>
         <h1>Harp &amp; Piano for Events</h1>
@@ -431,12 +435,11 @@
       </div>
 
       <div class="hero-media" aria-label="Featured image">
-        <!-- Replace with a real performance photo when you have one -->
         <img src="Images/meandharp.png" alt="Harp-themed image">
       </div>
     </section>
 
-    <!-- QUICK FACTS -->
+    <!-- quick facts -->
     <section class="facts" aria-label="Quick booking info">
       <div class="chip">
         <div class="label">Based near</div>
@@ -456,7 +459,7 @@
       </div>
     </section>
 
-    <!-- SERVICES -->
+    <!-- services -->
     <section class="section" aria-label="Services">
       <h2>Services</h2>
       <p class="sub">
@@ -503,7 +506,7 @@
       </div>
     </section>
 
-    <!-- GALLERY -->
+    <!-- gallery -->
     <section id="gallery" class="section" aria-label="Gallery">
       <h2>Gallery</h2>
       <p class="sub">
@@ -544,7 +547,7 @@
       </div>
     </section>
 
-    <!-- REPERTOIRE -->
+    <!-- repertoire -->
     <section id="repertoire" class="section" aria-label="Repertoire">
       <h2>Repertoire</h2>
       <p class="sub">
@@ -593,7 +596,7 @@
       </details>
     </section>
 
-    <!-- QUALIFICATIONS / HIGHLIGHTS -->
+    <!-- highlights -->
     <section class="section" aria-label="Qualifications and highlights">
       <h2>Highlights</h2>
       <p class="sub">
@@ -624,7 +627,7 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
+    <!-- contact -->
     <section class="section" aria-label="Contact">
       <h2>Contact</h2>
       <p class="sub">
@@ -651,12 +654,12 @@
       </div>
     </section>
 
-    <!-- PROMPT REQUIREMENTS -->
+    <!-- prompt requirements -->
     <section id="prompting" class="section" aria-label="Prompt evolution and final prompt">
       <h2>Prompt Evolution</h2>
       <p class="sub">
         This page was created through iterative prompting: starting simple, then adding structure, constraints,
-        and styling requirements. 
+        and styling requirements.
       </p>
 
       <div class="prompt-box">
@@ -685,10 +688,37 @@ Content/sections to include:
 11) Single file with inline CSS only; no external CSS; no libraries/templates.
 12) Add a textarea containing the final prompt with a scrollbar if it’s long.
 
-Make the page look polished and cohesive and ensure spacing/typography are consistent and responsive. I will provide names of photos you can use that are already uploaded into my folder, as well as written details of my harp/piano experience. </textarea>
+Make the page look polished and cohesive and ensure spacing/typography are consistent and responsive. I will provide names of photos you can use that are already uploaded into my folder, as well as written details of my harp/piano experience.</textarea>
       </div>
     </section>
 
   </main>
+
+  <script>
+  (() => {
+    const btn = document.getElementById("styleToggle");
+    if (!btn) return;
+
+    const STYLE_A = "styles.css";
+    const STYLE_B = "styles-alt.css";
+    const KEY = "siteStyleHref";
+
+    function syncLabel() {
+      const saved = localStorage.getItem(KEY);
+      const isAlt = saved === STYLE_B;
+      btn.setAttribute("aria-pressed", String(isAlt));
+      btn.textContent = isAlt ? "Original Style" : "Style Change";
+    }
+
+    syncLabel();
+
+    btn.addEventListener("click", () => {
+      const saved = localStorage.getItem(KEY);
+      const next = (saved === STYLE_B) ? STYLE_A : STYLE_B;
+      localStorage.setItem(KEY, next);
+      syncLabel();
+    });
+  })();
+  </script>
 </body>
 </html>
