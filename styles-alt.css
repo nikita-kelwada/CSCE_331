@@ -24,10 +24,10 @@
   --reveal-max:650px;
   --reveal-speed:.28s;
 
-  /* home: move "hi my name is nikita" margins here */
-  --hi-top:60px;     /* distance from top */
-  --hi-right:60px;   /* distance from right */
-  --icons-gap:28px;  /* space between bio and icon links */
+  /* home: "hi my name is nikita" positioning + bio/icon spacing */
+  --hi-top:60px;
+  --hi-right:60px;
+  --icons-gap:28px;
 }
 
 *{ box-sizing:border-box; }
@@ -40,9 +40,7 @@ body{
   overflow-x:hidden;
 }
 
-/* =========
-   sidebar
-   ========= */
+/* sidebar */
 .topbar{
   position:fixed;
   top:0;
@@ -71,7 +69,7 @@ body{
   border-radius:50%;
   object-fit:cover;
   border:0.1px solid var(--muted);
-  background: color-mix(in srgb, var(--muted) 70%, transparent);
+  background:color-mix(in srgb, var(--muted) 70%, transparent);
 }
 
 .brand-name{
@@ -106,7 +104,7 @@ body{
   transition:opacity .15s ease;
   -webkit-appearance:none;
   appearance:none;
-  font-size: 1.4rem;
+  font-size:1.4rem;
 }
 
 .tab::after{
@@ -124,9 +122,7 @@ body{
 .tab.active{ opacity:1; }
 .tab.active::after{ width:100%; }
 
-/* =========
-   page area (right of sidebar)
-   ========= */
+/* page area (right of sidebar) */
 main,
 .layout,
 .qualifications-page,
@@ -150,9 +146,7 @@ body > .service-wrap{
   max-width:var(--content-max);
 }
 
-/* =========
-   typography
-   ========= */
+/* typography */
 .intro{ margin:14px 0 18px; }
 
 .name,
@@ -178,17 +172,19 @@ body > .service-wrap{
   line-height:1.75;
   margin:0;
   max-width:72ch;
-  font-size: 1.3rem;
+  font-size:1.3rem;
 }
 
-/* =========
-   landing / home
-   ========= */
+.bio-bold{
+  font-family:"Delicious Handrawn", cursive;
+  font-size:1.6rem;
+}
 
-/* make landing width match remaining viewport (so centering feels correct on big screens) */
+/* landing / home */
 body:has(.layout.landing) .layout.landing{
   max-width:none;
   width:calc(100vw - (var(--sidebar-w) + var(--sidebar-gap)));
+  transform:translateX(calc(-1 * (var(--sidebar-w) + var(--sidebar-gap)) / 2));
 }
 
 .layout.landing{
@@ -208,21 +204,16 @@ body:has(.layout.landing) .layout.landing{
 }
 
 .round-square-img{
-  width: 240px;              /* edit size here */
-  height: 240px;             /* must match width for a true circle */
+  width:240px;
+  height:240px;
   display:block;
   margin-top:100px;
   margin-left:0;
-
   border-radius:50%;
   object-fit:cover;
-
   border:0.1px solid var(--muted);
-
-  /* tinted ring background behind the image (subtle) */
-  background: color-mix(in srgb, var(--muted) 50%, transparent);
+  background:color-mix(in srgb, var(--muted) 50%, transparent);
 }
-
 
 .layout.landing .intro{
   width:min(820px, 92vw);
@@ -237,12 +228,6 @@ body:has(.layout.landing) .layout.landing{
   margin:0 auto;
   text-align:center;
 }
-
-/* center landing content relative to the full viewport (including sidebar) */
-body:has(.layout.landing) .layout.landing{
-  transform: translateX(calc(-1 * (var(--sidebar-w) + var(--sidebar-gap)) / 2));
-}
-
 
 /* icon links */
 .icon-links{
@@ -263,9 +248,7 @@ body:has(.layout.landing) .layout.landing{
 
 .icon-links a:hover img{ transform:scale(1.07); }
 
-/* =========
-   hint pill + reveal toggle (shared)
-   ========= */
+/* hint pill + reveal toggle (shared) */
 .hover-hint{
   position:absolute;
   left:12px;
@@ -286,9 +269,7 @@ body:has(.layout.landing) .layout.landing{
   pointer-events:none;
 }
 
-/* =========
-   portfolio cards
-   ========= */
+/* portfolio cards */
 .portfolio-list{
   display:grid;
   grid-template-columns:repeat(12, minmax(0,1fr));
@@ -409,9 +390,7 @@ body:has(.layout.landing) .layout.landing{
   font-size:.95rem;
 }
 
-/* =========
-   service cards
-   ========= */
+/* service cards */
 .service-list{
   display:grid;
   grid-template-columns:repeat(12, minmax(0,1fr));
@@ -523,9 +502,7 @@ body:has(.layout.landing) .layout.landing{
   line-height:1.6;
 }
 
-/* =========
-   qualifications
-   ========= */
+/* qualifications */
 .qualifications-layout{
   display:grid;
   grid-template-columns:1fr 1.1fr;
@@ -534,26 +511,49 @@ body:has(.layout.landing) .layout.landing{
   margin-top:10px;
 }
 
-.qualifications-text,
-.qualifications-resume{
-  background:var(--panel);
-  border:1px solid var(--stroke);
-  border-radius:var(--radius);
-  padding:18px;
-  min-width:0;
-}
-
 .resume-iframe{
   width:100%;
   height:min(62vh, 640px);
   border-radius:16px;
   border:0;
   background:transparent;
+  margin-top:6px;
 }
 
-/* =========
-   breakpoints
-   ========= */
+/* qualifications: make "Open" look like a button */
+.resume-viewer-action,
+.qualifications-resume a,
+.resume-viewer a{
+  color:var(--ink);
+  text-decoration:none;
+  font-size:0.95rem;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:var(--panel-strong);
+  border:1px solid var(--stroke);
+  transition:transform .15s ease, opacity .15s ease, background .15s ease;
+}
+
+.resume-viewer-action:hover,
+.qualifications-resume a:hover,
+.resume-viewer a:hover{
+  transform:translateY(-1px);
+  opacity:1;
+}
+
+.resume-viewer-action:visited,
+.qualifications-resume a:visited,
+.resume-viewer a:visited{
+  color:var(--ink);
+}
+
+/* space between "Resume / Open" row and the pdf viewer */
+.resume-viewer-header{ margin-bottom:14px; }
+
+/* breakpoints */
 @media (max-width:1250px){
   .project-card,.service-card{ grid-column:span 12; }
   .qualifications-layout{ grid-template-columns:1fr; }
@@ -604,7 +604,6 @@ body:has(.layout.landing) .layout.landing{
     align-items:stretch;
   }
 
-  /* home: center on full viewport on small screens */
   body:has(.layout.landing) main{
     padding-left:0;
     padding-right:0;
@@ -616,9 +615,7 @@ body:has(.layout.landing) .layout.landing{
   }
 }
 
-/* =========
-   typewriter (style 2)
-   ========= */
+/* typewriter (style 2) */
 .typewriter h1{
   display:inline-block;
   overflow:hidden;
@@ -633,15 +630,11 @@ body:has(.layout.landing) .layout.landing{
 @keyframes typing{ from{ width:0; } to{ width:26ch; } }
 @keyframes blink-caret{ from,to{ border-color:transparent; } 50%{ border-color:var(--ink); } }
 
-/* =========
-   home-only overrides
-   ========= */
-
-/* move ONLY "hi, my name is nikita!" to the top-right corner */
+/* home-only overrides */
 body:has(.layout.landing) .typewriter h1{
   position:fixed;
-  top:var(--hi-top);       /* change in :root */
-  right:0px;   /* change in :root */
+  top:var(--hi-top);
+  right:0px;
   left:auto;
   transform:none;
   margin:0;
@@ -649,8 +642,6 @@ body:has(.layout.landing) .typewriter h1{
   text-align:right;
 }
 
-/* spacing between bio and icon links */
 body:has(.layout.landing) .icon-links{
-  margin-top:var(--icons-gap); /* change in :root */
+  margin-top:var(--icons-gap);
 }
-
