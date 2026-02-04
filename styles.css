@@ -71,7 +71,7 @@ p,li,a,span,
   flex-wrap:wrap;
 }
 
-/* ✅ make <a> and <button> tabs look identical */
+/* make <a> and <button> tabs look identical */
 .tab{
   font:inherit;
   text-decoration:none;
@@ -90,12 +90,10 @@ p,li,a,span,
   line-height:1;
 }
 
-/* also remove the “button box” in Safari/Chrome */
 .tab:focus{ outline:none; }
 
 .tab:hover{ transform:scale(1.1); }
 
-/* optional: make keyboard focus still visible but subtle */
 .tab:focus-visible{
   outline:2px solid rgba(0,0,0,.25);
   outline-offset:4px;
@@ -142,7 +140,7 @@ p,li,a,span,
   color:var(--ink);
   line-height:1.7;
   font-size:20px;
-  font-weight: bold; 
+  font-weight:bold;
 }
 
 /* landing image */
@@ -366,10 +364,10 @@ p,li,a,span,
   grid-template-columns:1fr minmax(0,520px);
 }
 
-/* square image frame */
+/* rectangular image frame (landscape) */
 .service-media{
-  width:320px;
-  aspect-ratio:1 / 1;
+  width:520px;
+  aspect-ratio:16 / 9;   /* forces identical rectangle size */
   border-radius:22px;
   overflow:hidden;
   flex-shrink:0;
@@ -377,6 +375,13 @@ p,li,a,span,
   box-shadow:var(--shadow-soft);
   background:transparent;
   position:relative;
+}
+
+/* NEW structure compatibility */
+.service-card .service-media{
+  width:520px;
+  aspect-ratio:16 / 9;   /* same here */
+  margin:0 auto;
 }
 
 .service-img{
@@ -453,8 +458,8 @@ p,li,a,span,
 }
 
 .service-card .service-media{
-  width:320px;
-  aspect-ratio:1 / 1;
+  width:520px;
+  height:300px;
   margin:0 auto;
 }
 
@@ -619,7 +624,9 @@ p,li,a,span,
 
   .service-media,
   .service-card .service-media{
-    width:min(360px, 90vw);
+    width:min(520px, 90vw);
+    height:auto;
+    aspect-ratio:16 / 9;
   }
 
   .qualifications-layout{ grid-template-columns:1fr; }
