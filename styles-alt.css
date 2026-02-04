@@ -1,3 +1,6 @@
+/* styles-alt.css
+   style 2: dark sketchbook (sidebar + panels)
+*/
 
 :root{
   --bg:#6e4e40;
@@ -5,27 +8,26 @@
   --muted:#e2c8b4;
 
   --sidebar-w:180px;
+  --sidebar-gap:26px;
 
-  /* how far content starts from the sidebar */
-  --sidebar-gap: 26px;
-
-  /* max width for the “content column” (make bigger/smaller here) */
-  --content-max: 1160px;
-
+  --content-max:1160px;
   --radius:18px;
 
-  --panel: rgba(255,255,255,.09);
-  --panel-strong: rgba(255,255,255,.13);
-  --stroke: rgba(255,255,255,.14);
+  --panel:rgba(255,255,255,.09);
+  --panel-strong:rgba(255,255,255,.13);
+  --stroke:rgba(255,255,255,.14);
 
-  /* outer page gutters */
-  --gutter: 34px;
+  --gutter:34px;
+  --pad-top:56px;
+  --pad-bot:56px;
 
-  --pad-top: 56px;
-  --pad-bot: 56px;
+  --reveal-max:650px;
+  --reveal-speed:.28s;
 
-  --reveal-max: 650px;
-  --reveal-speed: .28s;
+  /* home: move "hi my name is nikita" margins here */
+  --hi-top:60px;     /* distance from top */
+  --hi-right:60px;   /* distance from right */
+  --icons-gap:28px;  /* space between bio and icon links */
 }
 
 *{ box-sizing:border-box; }
@@ -47,10 +49,7 @@ body{
   left:0;
   height:100vh;
   width:var(--sidebar-w);
-
-  /* ✅ more left padding so nav/logo isn’t hugging the edge */
-  padding:22px 14px 22px 22px;
-
+  padding:28px 18px 28px 36px;
   display:flex;
   flex-direction:column;
   gap:18px;
@@ -97,12 +96,10 @@ body{
   margin:2px 0;
   text-decoration:none;
   color:inherit;
-
   background:transparent;
   border:0;
   font:inherit;
   cursor:pointer;
-
   opacity:.92;
   transition:opacity .15s ease;
   -webkit-appearance:none;
@@ -112,9 +109,9 @@ body{
 .tab::after{
   content:"";
   display:block;
-  height:0.12em;
+  height:.12em;
   width:0;
-  margin-top:0.25em;
+  margin-top:.25em;
   background:var(--ink);
   transition:width .45s ease;
 }
@@ -125,9 +122,7 @@ body{
 .tab.active::after{ width:100%; }
 
 /* =========
-   universal page area (right of sidebar)
-   IMPORTANT: make the *page area* full width,
-   then center the *content blocks* inside it.
+   page area (right of sidebar)
    ========= */
 main,
 .layout,
@@ -135,33 +130,27 @@ main,
 body > .portfolio-wrap,
 body > .service-wrap{
   margin-left:calc(var(--sidebar-w) + var(--sidebar-gap));
-  padding: var(--pad-top) var(--gutter) var(--pad-bot);
+  width:calc(100% - (var(--sidebar-w) + var(--sidebar-gap)));
+  padding:var(--pad-top) var(--gutter) var(--pad-bot);
   min-height:100vh;
-
-  /* page area takes the full remaining width */
-  width: calc(100% - (var(--sidebar-w) + var(--sidebar-gap)));
-  margin-right:0;
-
-  /* ✅ center children blocks instead of anchoring left */
   display:flex;
   flex-direction:column;
   align-items:center;
 }
 
-/* =========
-   shared text blocks (centered width)
-   ========= */
+/* shared widths */
 .intro,
 .portfolio-list,
 .service-list,
 .qualifications-layout{
   width:100%;
-  max-width: var(--content-max);
+  max-width:var(--content-max);
 }
 
-.intro{
-  margin: 14px 0 18px;
-}
+/* =========
+   typography
+   ========= */
+.intro{ margin:14px 0 18px; }
 
 .name,
 .qual-title,
@@ -189,25 +178,33 @@ body > .service-wrap{
 }
 
 /* =========
-   landing (home)
+   landing / home
    ========= */
+
+/* make landing width match remaining viewport (so centering feels correct on big screens) */
+body:has(.layout.landing) .layout.landing{
+  max-width:none;
+  width:calc(100vw - (var(--sidebar-w) + var(--sidebar-gap)));
+}
+
 .layout.landing{
-  /* override the flex column layout and use grid inside */
-  width:100%;
-  max-width: var(--content-max);
-  display:grid;
-  grid-template-columns: 1.05fr .95fr;
-  gap:22px;
+  min-height:calc(100vh - var(--pad-top) - var(--pad-bot));
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
   align-items:center;
+  text-align:center;
+  gap:18px;
 }
 
 .layout.landing > section:first-child{
   width:100%;
-  max-width: 720px;
+  display:flex;
+  justify-content:center;
 }
 
 .round-square-img{
-  width:100%;
+  width:min(250px, 54vw);
   height:auto;
   display:block;
   border-radius:24px;
@@ -215,20 +212,26 @@ body > .service-wrap{
 }
 
 .layout.landing .intro{
-  margin:0;
-  padding:16px 18px;
-  background:var(--panel);
-  border:1px solid var(--stroke);
-  border-radius:var(--radius);
-  max-width:none;
+  width:min(820px, 92vw);
+  margin:0 auto;
+  padding:0;
+  background:transparent;
+  border:0;
+  border-radius:0;
 }
 
-/* icons */
+.layout.landing .bio{
+  margin:0 auto;
+  text-align:center;
+}
+
+/* icon links */
 .icon-links{
   display:flex;
-  gap:12px;
+  justify-content:center;
   align-items:center;
-  margin-top:12px;
+  gap:12px;
+  margin-top:14px;
 }
 
 .icon-links img{
@@ -236,17 +239,13 @@ body > .service-wrap{
   height:34px;
   border-radius:12px;
   padding:4px;
-  background:var(--panel-strong);
-  border:1px solid var(--stroke);
   transition:transform .15s ease;
 }
 
-.icon-links a:hover img{
-  transform:scale(1.07);
-}
+.icon-links a:hover img{ transform:scale(1.07); }
 
 /* =========
-   hint pill on images
+   hint pill + reveal toggle (shared)
    ========= */
 .hover-hint{
   position:absolute;
@@ -269,17 +268,17 @@ body > .service-wrap{
 }
 
 /* =========
-   portfolio
+   portfolio cards
    ========= */
 .portfolio-list{
   display:grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns:repeat(12, minmax(0,1fr));
   gap:24px;
   margin-top:14px;
 }
 
 .project-card{
-  grid-column: span 6;
+  grid-column:span 6;
   display:flex;
   flex-direction:column;
   border-radius:var(--radius);
@@ -288,10 +287,7 @@ body > .service-wrap{
   border:1px solid var(--stroke);
 }
 
-.project-media{
-  position:relative;
-  width:100%;
-}
+.project-media{ position:relative; width:100%; }
 
 .project-img{
   width:100%;
@@ -307,10 +303,7 @@ body > .service-wrap{
   background:transparent;
 }
 
-.project-body{
-  position:relative;
-  padding:16px 16px 14px;
-}
+.project-body{ padding:16px 16px 14px; }
 
 .project-year{
   color:var(--muted);
@@ -351,8 +344,8 @@ body > .service-wrap{
 .project-links img{
   width:22px;
   height:22px;
-  display:block;
   object-fit:contain;
+  display:block;
   opacity:.9;
   transition:transform .18s ease, opacity .18s ease;
 }
@@ -373,12 +366,7 @@ body > .service-wrap{
     padding-top var(--reveal-speed) ease;
 }
 
-.project-card:hover .project-expand{
-  max-height:var(--reveal-max);
-  opacity:1;
-  padding-top:10px;
-}
-
+.project-card:hover .project-expand,
 .project-body .reveal-toggle:checked ~ .project-expand{
   max-height:var(--reveal-max);
   opacity:1;
@@ -403,17 +391,17 @@ body > .service-wrap{
 }
 
 /* =========
-   service
+   service cards
    ========= */
 .service-list{
   display:grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns:repeat(12, minmax(0,1fr));
   gap:24px;
   margin-top:14px;
 }
 
 .service-card{
-  grid-column: span 6;
+  grid-column:span 6;
   display:flex;
   flex-direction:column;
   border-radius:var(--radius);
@@ -422,10 +410,7 @@ body > .service-wrap{
   border:1px solid var(--stroke);
 }
 
-.service-media{
-  position:relative;
-  width:100%;
-}
+.service-media{ position:relative; width:100%; }
 
 .service-img{
   width:100%;
@@ -441,10 +426,7 @@ body > .service-wrap{
   background:transparent;
 }
 
-.service-body{
-  position:relative;
-  padding:16px 16px 14px;
-}
+.service-body{ padding:16px 16px 14px; }
 
 .service-label{
   display:inline-block;
@@ -508,12 +490,7 @@ body > .service-wrap{
     padding-top var(--reveal-speed) ease;
 }
 
-.service-card:hover .service-expand{
-  max-height:var(--reveal-max);
-  opacity:1;
-  padding-top:10px;
-}
-
+.service-card:hover .service-expand,
 .service-body .reveal-toggle:checked ~ .service-expand{
   max-height:var(--reveal-max);
   opacity:1;
@@ -532,7 +509,7 @@ body > .service-wrap{
    ========= */
 .qualifications-layout{
   display:grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns:1fr 1.1fr;
   gap:22px;
   align-items:start;
   margin-top:10px;
@@ -549,7 +526,7 @@ body > .service-wrap{
 
 .resume-iframe{
   width:100%;
-  height: min(62vh, 640px);
+  height:min(62vh, 640px);
   border-radius:16px;
   border:0;
   background:transparent;
@@ -558,24 +535,21 @@ body > .service-wrap{
 /* =========
    breakpoints
    ========= */
-@media (max-width: 1250px){
-  .project-card{ grid-column: span 12; }
-  .service-card{ grid-column: span 12; }
+@media (max-width:1250px){
+  .project-card,.service-card{ grid-column:span 12; }
   .qualifications-layout{ grid-template-columns:1fr; }
-  .layout.landing{ grid-template-columns: 1fr; }
 }
 
-@media (max-width: 980px){
+@media (max-width:980px){
   :root{
     --sidebar-w:200px;
-    --sidebar-gap: 18px;
-    --gutter: 22px;
-    --content-max: 100%;
+    --sidebar-gap:18px;
+    --gutter:22px;
+    --content-max:100%;
   }
 }
 
-/* small screens: sidebar becomes topbar */
-@media (max-width: 700px){
+@media (max-width:700px){
   .topbar{
     position:static;
     width:auto;
@@ -594,9 +568,9 @@ body > .service-wrap{
   }
 
   :root{
-    --gutter: 14px;
-    --pad-top: 44px;
-    --content-max: 100%;
+    --gutter:14px;
+    --pad-top:44px;
+    --content-max:100%;
   }
 
   main,
@@ -611,54 +585,52 @@ body > .service-wrap{
     align-items:stretch;
   }
 
-  .intro,
-  .portfolio-list,
-  .service-list,
-  .qualifications-layout{
-    max-width:100%;
+  /* home: center on full viewport on small screens */
+  body:has(.layout.landing) main{
+    padding-left:0;
+    padding-right:0;
+  }
+
+  body:has(.layout.landing) .layout.landing{
+    width:100vw;
+    padding:var(--pad-top) var(--gutter) var(--pad-bot);
   }
 }
+
 /* =========
-   style 2: resume open button (make it a real pill button)
+   typewriter (style 2)
+   ========= */
+.typewriter h1{
+  display:inline-block;
+  overflow:hidden;
+  white-space:nowrap;
+  border-right:.15em solid var(--ink);
+  padding-right:.2em;
+  letter-spacing:.06em;
+  width:0;
+  animation:typing 3s steps(26,end) forwards, blink-caret .75s step-end infinite;
+}
+
+@keyframes typing{ from{ width:0; } to{ width:26ch; } }
+@keyframes blink-caret{ from,to{ border-color:transparent; } 50%{ border-color:var(--ink); } }
+
+/* =========
+   home-only overrides
    ========= */
 
-/* kill default link purple/visited inside the resume header */
-.resume-viewer-action,
-.resume-viewer-action:visited{
-  color:var(--ink);
+/* move ONLY "hi, my name is nikita!" to the top-right corner */
+body:has(.layout.landing) .typewriter h1{
+  position:fixed;
+  top:var(--hi-top);       /* change in :root */
+  right:var(--hi-right);   /* change in :root */
+  left:auto;
+  transform:none;
+  margin:0;
+  z-index:999;
+  text-align:right;
 }
 
-/* pill button look */
-.resume-viewer-action{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:8px 14px;
-  border-radius:999px;
-
-  background:rgba(255,255,255,.12);
-  border:1px solid rgba(255,255,255,.18);
-
-  text-decoration:none;
-  font-size:.95rem;
-  line-height:1;
-
-  transition:transform .15s ease, background .15s ease, opacity .15s ease;
-  opacity:.95;
-}
-
-.resume-viewer-action:hover{
-  opacity:1;
-  background:rgba(255,255,255,.18);
-  transform:translateY(-1px);
-}
-
-.resume-viewer-action:active{
-  transform:translateY(0px);
-}
-
-/* optional: keyboard focus */
-.resume-viewer-action:focus-visible{
-  outline:2px solid rgba(255,255,255,.35);
-  outline-offset:3px;
+/* spacing between bio and icon links */
+body:has(.layout.landing) .icon-links{
+  margin-top:var(--icons-gap); /* change in :root */
 }
