@@ -225,22 +225,24 @@
     const STYLE_A = "styles.css";
     const STYLE_B = "styles-alt.css";
     const KEY = "siteStyleHref";
+    const VER = "5"; // bump this when you change CSS
 
     function apply(href) {
-      linkEl.setAttribute("href", href + "?v=5");
+      linkEl.setAttribute("href", href + "?v=" + VER);
       localStorage.setItem(KEY, href);
 
       const isAlt = href === STYLE_B;
       btn.setAttribute("aria-pressed", String(isAlt));
-      btn.textContent = isAlt ? "Original Style" : "Style Change";
+      btn.textContent = "Style Change";
     }
 
     const saved = localStorage.getItem(KEY);
     apply(saved === STYLE_B ? STYLE_B : STYLE_A);
 
     btn.addEventListener("click", () => {
-      const current = linkEl.getAttribute("href");
-      apply(current === STYLE_B ? STYLE_A : STYLE_B);
+      const current = localStorage.getItem(KEY) === STYLE_B ? STYLE_B : STYLE_A;
+      const next = current === STYLE_B ? STYLE_A : STYLE_B;
+      apply(next);
     });
   })();
   </script>
